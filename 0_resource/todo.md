@@ -91,7 +91,7 @@
 
 ## STAGE 4: PREMIUM UI, 4-PHASE STEPPER & JUDGE SANDBOX — Phases 14–20
 
-- [ ] **Phase 14** → `app/components/visual-pipeline-canvas.tsx`
+- [x] **Phase 14** → `app/components/visual-pipeline-canvas.tsx`
   - **TARGET**: Real-time 4-phase attestation stepper visualizer.
   - **IMPLEMENTS**: Animated pipeline showing:
     - Phase 1: Sepolia Tx Detected [0.0s–0.5s]

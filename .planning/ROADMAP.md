@@ -26,7 +26,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 - [x] **Phase 13: SDK Wrapper, Triple-Layer Resolver & TEE Signer** - Build `lib/attestcoin.ts`, `lib/proof-resolver.ts`, and `lib/tee-signer.ts`.
 
 ### Stage 4: Premium UI, 4-Phase Stepper & Judge Sandbox (Phases 14–20)
-- [ ] **Phase 14: Visual 4-Phase Attestation Stepper Canvas** - Build `visual-pipeline-canvas.tsx` with Framer Motion animations.
+- [x] **Phase 14: Visual 4-Phase Attestation Stepper Canvas** - Build `visual-pipeline-canvas.tsx` with Framer Motion animations.
 - [ ] **Phase 15: 30-Second Zero-Wallet Interactive Sandbox** - Build `interactive-sandbox.tsx` with persona selector, state morphing, and ephemeral signing.
 - [ ] **Phase 16: Bayesian Radar Chart & Enclave Certificate Modal** - Build `risk-metric-radar.tsx` and `enclave-cert-modal.tsx`.
 - [ ] **Phase 17: Pre-Seeded Telemetry Table & Navigation Bar** - Build `telemetry-table.tsx` and `navbar.tsx`.
@@ -55,7 +55,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 | 11. Database Seeding Execution | 1/1 | Complete | 2026-08-28 |
 | 12. API Route Handlers | 1/1 | Complete | 2026-08-28 |
 | 13. SDK Wrapper & Resolver | 1/1 | Complete | 2026-08-28 |
-| 14. 4-Phase Stepper Canvas | 0/1 | Not started | - |
+| 14. 4-Phase Stepper Canvas | 1/1 | Complete | 2026-08-28 |
 | 15. Interactive Sandbox | 0/1 | Not started | - |
 | 16. Radar & Enclave Modal | 0/1 | Not started | - |
 | 17. Telemetry Table & Navbar | 0/1 | Not started | - |
