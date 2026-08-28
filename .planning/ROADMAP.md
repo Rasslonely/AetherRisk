@@ -18,7 +18,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 ### Stage 2: Monolith Scaffold & Zero-State Database (Phases 08–11)
 - [x] **Phase 8: Next.js 15 Monolith Full-Stack Scaffold** - Configure Next.js 15 App Router, TypeScript, Tailwind CSS v4, and dependencies.
 - [x] **Phase 9: Prisma Database Schema & Client Singleton** - Implement PostgreSQL models (`Borrower`, `Operation`, `CachedProof`, `EnclaveSigner`).
-- [ ] **Phase 10: TypeScript Domain Models & 18 Pre-Seeded Records** - Create `types.ts` and `telemetry-seed.ts` with 18 verified records and 3 personas.
+- [x] **Phase 10: TypeScript Domain Models & 18 Pre-Seeded Records** - Create `types.ts` and `telemetry-seed.ts` with 18 verified records and 3 personas.
 - [ ] **Phase 11: Database Seeding Execution (`seed-db.ts`)** - Seed Supabase PostgreSQL with 18 operations to fulfill Zero-Empty-State Law.
 
 ### Stage 3: SDK Integration, Proof Resolver & API Core (Phases 12–13)
@@ -51,7 +51,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 | 7. Deployment Scripts | 1/1 | Complete | 2026-08-28 |
 | 8. Next.js Monolith Scaffold | 1/1 | Complete | 2026-08-28 |
 | 9. Prisma Schema & Client | 1/1 | Complete | 2026-08-28 |
-| 10. TypeScript Domain & Seed Data | 0/1 | Not started | - |
+| 10. TypeScript Domain & Seed Data | 1/1 | Complete | 2026-08-28 |
 | 11. Database Seeding Execution | 0/1 | Not started | - |
 | 12. API Route Handlers | 0/1 | Not started | - |
 | 13. SDK Wrapper & Resolver | 0/1 | Not started | - |

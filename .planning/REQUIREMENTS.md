@@ -18,7 +18,7 @@
 ### Monolith Backend, Data & Seeding (DATA)
 
 - [x] **DATA-01**: Next.js 15 App Router monolith configuration with TypeScript, Tailwind CSS v4, Prisma ORM, and Supabase PostgreSQL schema (`Borrower`, `Operation`, `CachedProof`, `EnclaveSigner`).
-- [ ] **DATA-02**: 18 verified pre-seeded historical operations and 3 simulation personas seeded into database (`scripts/seed-db.ts`) fulfilling Zero-Empty-State Law.
+- [x] **DATA-02**: 18 verified pre-seeded historical operations and 3 simulation personas seeded into database (`scripts/seed-db.ts`) fulfilling Zero-Empty-State Law.
 - [ ] **DATA-03**: Core libraries `lib/attestcoin.ts` (`@gluwa/usc-sdk` wrapper), `lib/proof-resolver.ts` (Triple-Layer Resilience), and `lib/tee-signer.ts` (EIP-712 typed signing).
 - [ ] **DATA-04**: Native Next.js API route handlers: `GET /api/operations` (telemetry feed), `POST /api/proof` (proof resolver), and `POST /api/simulate` (sandbox execution).
 
@@ -47,7 +47,7 @@
 | CORE-06 | Phase 6 | Complete ✓ |
 | CORE-07 | Phase 7 | Complete ✓ |
 | DATA-01 | Phase 8 & 9 | Complete ✓ |
-| DATA-02 | Phase 10 & 11 | Pending |
+| DATA-02 | Phase 10 & 11 | Complete ✓ |
 | DATA-03 | Phase 13 | Pending |
 | DATA-04 | Phase 12 | Pending |
 | SANDBOX-01 | Phase 15 | Pending |
@@ -61,9 +61,9 @@
 **Coverage:**
 - v1 requirements: 18 total
 - Mapped to phases: 18
-- Completed: 9
+- Completed: 10
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-08-28*
-*Last updated: 2026-08-28 after Phase 8 completion*
+*Last updated: 2026-08-28 after Phase 10 completion*
