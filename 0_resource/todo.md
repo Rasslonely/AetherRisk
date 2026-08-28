@@ -138,7 +138,7 @@
     - `layout.tsx`: HTML head with SEO meta tags, Google Fonts link, body wrapper, `navbar.tsx`, and children slot.
   - **ACCEPTANCE**: `pnpm next dev` renders styled layout with navbar.
 
-- [ ] **Phase 19** → `app/page.tsx`
+- [x] **Phase 19** → `app/page.tsx`
   - **TARGET**: Executive Dashboard & Pitch Viewport (Landing Page).
   - **IMPLEMENTS**:
     - Hero section with AetherRisk tagline: "Autonomous TEE-Guarded Cross-Chain Credit & Liquidation Underwriter".
