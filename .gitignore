@@ -37,3 +37,7 @@ lerna-debug.log*
 .DS_Store
 *.pem
 Thumbs.db
+
+# Private Ideas & Internal Specifications
+.private_ideas/
+_private_ideas/
