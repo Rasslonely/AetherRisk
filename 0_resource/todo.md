@@ -131,7 +131,7 @@
     - `navbar.tsx`: Navigation between Home `/`, Operations `/operations`, Sandbox `/sandbox`. Active state highlight. AetherRisk logo + "BUIDL CTC 2026" badge.
   - **ACCEPTANCE**: Table shows ≥ 18 rows with zero empty states. All explorer links are clickable.
 
-- [ ] **Phase 18** → `app/globals.css` + `app/layout.tsx`
+- [x] **Phase 18** → `app/globals.css` + `app/layout.tsx`
   - **TARGET**: Design system globals + root layout with providers.
   - **IMPLEMENTS**:
     - `globals.css`: Tailwind v4 imports, state transition keyframes (`scoreReveal`, `badgePulse`, `healthBarFill`), color system (Danger: `hsl(0,85%,8%)`, Transition: `hsl(210,60%,12%)`, Healthy: `hsl(145,85%,8%)`), typography (Inter/Outfit from Google Fonts).
