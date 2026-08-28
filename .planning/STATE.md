@@ -5,22 +5,22 @@
 See: `.planning/PROJECT.md` (updated 2026-08-28)
 
 **Core Value:** Eliminate cross-chain oracle sync latency and false liquidations by verifying source-chain transactions synchronously in Creditcoin precompile bytecode within 15 seconds while evaluating credit risk deterministically inside hardware TEE enclaves.  
-**Current Focus:** Stage 4 / Phase 15 — 30-Second Zero-Wallet Interactive Sandbox
+**Current Focus:** Stage 4 / Phase 16 — Bayesian Radar Chart & Enclave Certificate Modal
 
 ## Current Position
 
-- **Phase:** Phase 14 (Visual 4-Phase Attestation Stepper Canvas) — **COMPLETE**
+- **Phase:** Phase 15 (30-Second Zero-Wallet Interactive Sandbox) — **COMPLETE**
 - **Stage 1 (Hard-Tech Primitive Core, Phases 01–07):** **100% COMPLETE (7/7 Phases)**
 - **Stage 2 (Monolith Scaffold & Zero-State Database, Phases 08–11):** **100% COMPLETE (4/4 Phases)**
 - **Stage 3 (SDK Integration & API Core, Phases 12–13):** **100% COMPLETE (2/2 Phases)**
-- **Stage 4 (UI, Sandbox & Dashboard, Phases 14–20):** In Progress (1/7 Phases Complete)
-- **Next Phase:** Phase 15 (30-Second Zero-Wallet Interactive Sandbox `app/components/interactive-sandbox.tsx`)
-- **Status:** 4-Phase Stepper Canvas implemented and verified (`rtk pnpm build` PASS).
+- **Stage 4 (UI, Sandbox & Dashboard, Phases 14–20):** In Progress (2/7 Phases Complete)
+- **Next Phase:** Phase 16 (Bayesian Radar Chart & Enclave Certificate Modal `app/components/risk-metric-radar.tsx` & `app/components/enclave-cert-modal.tsx`)
+- **Status:** Interactive Sandbox implemented with extreme visual contrast state morphing (`rtk pnpm build` PASS).
 - **Blockers:** None
 
 ## Milestone Status
 
-- 🚧 **v1.0 Grand-Prize Core** (Phases 1–22) — 14/22 Phases Complete
+- 🚧 **v1.0 Grand-Prize Core** (Phases 1–22) — 15/22 Phases Complete
 
 ## Completed Phases
 - ✓ **Phase 1**: Foundry Config & BlockProver Interface (`0xFD2`)
@@ -37,3 +37,4 @@ See: `.planning/PROJECT.md` (updated 2026-08-28)
 - ✓ **Phase 12**: Next.js Native API Route Handlers (`/api/operations`, `/api/proof`, `/api/simulate`)
 - ✓ **Phase 13**: SDK Wrapper, Triple-Layer Resolver & TEE Signer (`lib/attestcoin.ts`, `lib/proof-resolver.ts`, `lib/tee-signer.ts`)
 - ✓ **Phase 14**: Visual 4-Phase Attestation Stepper Canvas (`app/components/visual-pipeline-canvas.tsx`)
+- ✓ **Phase 15**: 30-Second Zero-Wallet Interactive Sandbox (`app/components/interactive-sandbox.tsx`)

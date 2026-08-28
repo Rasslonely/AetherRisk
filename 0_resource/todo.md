@@ -101,7 +101,7 @@
   - **FRAMER MOTION**: Animated progress bars with realistic timing. Badge pulse on verification.
   - **ACCEPTANCE**: Component renders all 4 phases. Progress bar animates from 0% to 100%.
 
-- [ ] **Phase 15** → `app/components/interactive-sandbox.tsx`
+- [x] **Phase 15** → `app/components/interactive-sandbox.tsx`
   - **TARGET**: ENGINE 2 — The 30-Second Zero-Wallet Judge Simulator.
   - **IMPLEMENTS**:
     - Persona selector (3 pre-built personas from telemetry-seed.ts).
