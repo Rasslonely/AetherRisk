@@ -179,6 +179,7 @@ export function InteractiveSandbox({
             return (
               <button
                 key={p.id}
+                data-testid={`persona-btn-${p.id.replace('persona-', '')}`}
                 onClick={() => setSelectedPersonaId(p.id)}
                 disabled={isSimulating}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium transition-all ${
@@ -310,14 +311,14 @@ export function InteractiveSandbox({
                 {(isResolved
                   ? selectedPersona.currentCreditLine
                   : displayCreditLine
-                ).toLocaleString()}
+                ).toLocaleString('en-US')}
               </div>
             </div>
           </div>
 
           <div className="mt-4 p-3 rounded-xl bg-red-950/30 border border-red-500/20 flex items-center justify-between text-xs text-red-300">
             <span>
-              Pending Event: {selectedPersona.defaultAction} ${selectedPersona.defaultAmount.toLocaleString()} {selectedPersona.defaultAsset}
+              Pending Event: {selectedPersona.defaultAction} ${selectedPersona.defaultAmount.toLocaleString('en-US')} {selectedPersona.defaultAsset}
             </span>
             <span className="font-mono text-[10px] text-red-400">Sepolia L1</span>
           </div>
@@ -386,6 +387,7 @@ export function InteractiveSandbox({
               </span>
               <div className="flex items-baseline gap-2 mt-1.5">
                 <span
+                  data-testid="after-credit-score-value"
                   className={`text-2xl font-bold font-mono ${
                     isResolved ? 'text-emerald-400' : 'text-slate-500'
                   }`}
@@ -415,6 +417,7 @@ export function InteractiveSandbox({
               </span>
               <div className="flex items-baseline gap-2 mt-1.5">
                 <span
+                  data-testid="after-health-factor-value"
                   className={`text-2xl font-bold font-mono ${
                     isResolved ? 'text-emerald-400' : 'text-slate-500'
                   }`}
@@ -463,7 +466,7 @@ export function InteractiveSandbox({
                     +$
                     {(
                       selectedPersona.targetCreditLine - selectedPersona.currentCreditLine
-                    ).toLocaleString()}
+                    ).toLocaleString('en-US')}
                   </span>
                 )}
               </span>
@@ -472,7 +475,7 @@ export function InteractiveSandbox({
                   isResolved ? 'text-slate-100' : 'text-slate-500'
                 }`}
               >
-                {isResolved ? `$${displayCreditLine.toLocaleString()}` : '---'}
+                {isResolved ? `$${displayCreditLine.toLocaleString('en-US')}` : '---'}
               </div>
             </div>
           </div>
@@ -511,7 +514,7 @@ export function InteractiveSandbox({
                 ? 'Verifying Cross-Chain Proof...'
                 : isResolved
                 ? 'Re-Run Proof Verification'
-                : `Simulate Repayment ($${selectedPersona.defaultAmount.toLocaleString()} ${selectedPersona.defaultAsset})`}
+                : `Simulate Repayment ($${selectedPersona.defaultAmount.toLocaleString('en-US')} ${selectedPersona.defaultAsset})`}
             </span>
             <div className="w-6 h-6 rounded-full bg-black/15 flex items-center justify-center">
               <ArrowRight className="h-3 w-3" />

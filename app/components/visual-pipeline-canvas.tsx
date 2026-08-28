@@ -37,7 +37,7 @@ export function VisualPipelineCanvas({
       subtitle: 'Event Emitted & Block Finalized',
       timing: '0.0s – 0.5s',
       icon: ExternalLink,
-      details: `${action} • $${provenAmountUsd.toLocaleString()} ${assetSymbol} (Block #${blockHeight})`,
+      details: `${action} • $${provenAmountUsd.toLocaleString('en-US')} ${assetSymbol} (Block #${blockHeight})`,
       hash: sourceTxHash,
       explorerUrl: `https://sepolia.etherscan.io/tx/${sourceTxHash}`,
     },

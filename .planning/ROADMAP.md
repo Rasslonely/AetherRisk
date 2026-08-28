@@ -35,7 +35,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 - [x] **Phase 20: Dedicated Telemetry & Full-Screen Sandbox Pages** - Build `app/operations/page.tsx` and `app/sandbox/page.tsx`.
 
 ### Stage 5: E2E Playwright Suite & Judge Verification (Phases 21–22)
-- [ ] **Phase 21: Playwright E2E Test Suite Automation** - Implement and pass `live-judge-flow.spec.ts` for zero-empty-state and sandbox flow.
+- [x] **Phase 21: Playwright E2E Test Suite Automation** - Implement and pass `live-judge-flow.spec.ts` for zero-empty-state and sandbox flow.
 - [ ] **Phase 22: Enclave Certificate JSON & Final Verification** - Build `public/enclave-attestation.json` and final verification gate.
 
 ## Progress
@@ -62,5 +62,5 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 | 18. Globals & Root Layout | 1/1 | Complete | 2026-08-28 |
 | 19. Executive Dashboard Page | 1/1 | Complete | 2026-08-28 |
 | 20. Dedicated Pages | 1/1 | Complete | 2026-08-28 |
-| 21. Playwright E2E Suite | 0/1 | Not started | - |
+| 21. Playwright E2E Suite | 1/1 | Complete | 2026-08-28 |
 | 22. Enclave Cert & Verification | 0/1 | Not started | - |

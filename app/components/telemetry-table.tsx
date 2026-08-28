@@ -270,7 +270,7 @@ export function TelemetryTable({
 
                   {/* Amount */}
                   <td className="px-4 py-3.5 font-mono font-semibold text-slate-200 whitespace-nowrap">
-                    ${Number(op.provenAmountUsd).toLocaleString()}
+                    ${Number(op.provenAmountUsd).toLocaleString('en-US')}
                     <span className="text-[10px] text-slate-500 font-normal ml-1">
                       {op.assetSymbol}
                     </span>

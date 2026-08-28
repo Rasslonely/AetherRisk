@@ -74,6 +74,7 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* TEE Certificate Modal Trigger Button */}
             <button
+              data-testid="tee-cert-btn"
               onClick={() => setCertModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-950/80 hover:bg-emerald-900/80 border border-emerald-500/40 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.15)] transition-all hover:scale-[1.02] active:scale-[0.98]"
               title="Inspect AMD SEV-SNP Remote Attestation Certificate"

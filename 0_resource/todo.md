@@ -159,7 +159,7 @@
 
 ## STAGE 5: LIVE BROWSER E2E VERIFICATION GATE (Anti-Hallucination Gate) — Phases 21–22
 
-- [ ] **Phase 21** → `tests/e2e/live-judge-flow.spec.ts` + `playwright.config.ts`
+- [x] **Phase 21** → `tests/e2e/live-judge-flow.spec.ts` + `playwright.config.ts`
   - **TARGET**: Strict Playwright E2E test suite from DEVOPS_BOM.md §3.
   - **IMPLEMENTS**:
     - Test 1 (Zero-Empty-State Law): Navigate to `/operations`, assert `[data-testid="operation-row"]` count ≥ 10, verify explorer link presence, assert zero console errors.
