@@ -29,7 +29,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 - [x] **Phase 14: Visual 4-Phase Attestation Stepper Canvas** - Build `visual-pipeline-canvas.tsx` with Framer Motion animations.
 - [x] **Phase 15: 30-Second Zero-Wallet Interactive Sandbox** - Build `interactive-sandbox.tsx` with persona selector, state morphing, and ephemeral signing.
 - [x] **Phase 16: Bayesian Radar Chart & Enclave Certificate Modal** - Build `risk-metric-radar.tsx` and `enclave-cert-modal.tsx`.
-- [ ] **Phase 17: Pre-Seeded Telemetry Table & Navigation Bar** - Build `telemetry-table.tsx` and `navbar.tsx`.
+- [x] **Phase 17: Pre-Seeded Telemetry Table & Navigation Bar** - Build `telemetry-table.tsx` and `navbar.tsx`.
 - [ ] **Phase 18: Design System Globals & Root Layout** - Implement `globals.css` state keyframes and `layout.tsx` SEO meta.
 - [ ] **Phase 19: Executive Pitch Dashboard Landing Page** - Build `app/page.tsx` with live metrics, pitch hero, and interactive preview.
 - [ ] **Phase 20: Dedicated Telemetry & Full-Screen Sandbox Pages** - Build `app/operations/page.tsx` and `app/sandbox/page.tsx`.
@@ -58,7 +58,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 | 14. 4-Phase Stepper Canvas | 1/1 | Complete | 2026-08-28 |
 | 15. Interactive Sandbox | 1/1 | Complete | 2026-08-28 |
 | 16. Radar & Enclave Modal | 1/1 | Complete | 2026-08-28 |
-| 17. Telemetry Table & Navbar | 0/1 | Not started | - |
+| 17. Telemetry Table & Navbar | 1/1 | Complete | 2026-08-28 |
 | 18. Globals & Root Layout | 0/1 | Not started | - |
 | 19. Executive Dashboard Page | 0/1 | Not started | - |
 | 20. Dedicated Pages | 0/1 | Not started | - |

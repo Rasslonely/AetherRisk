@@ -124,7 +124,7 @@
     - `enclave-cert-modal.tsx`: Modal showing off-chain TEE attestation certificate JSON (`public/enclave-attestation.json`) with hardware quote ID, measurement hash, signer derivation, Phala explorer link.
   - **ACCEPTANCE**: Radar chart updates dynamically during sandbox simulation. Certificate modal opens and displays formatted JSON.
 
-- [ ] **Phase 17** → `app/components/telemetry-table.tsx` + `app/components/navbar.tsx`
+- [x] **Phase 17** → `app/components/telemetry-table.tsx` + `app/components/navbar.tsx`
   - **TARGET**: Pre-seeded telemetry operations table + navigation bar.
   - **IMPLEMENTS**:
     - `telemetry-table.tsx`: Renders 18 operations from `GET /api/operations`. Columns: TxCode, Borrower, Type, Amount, Score Delta (green/red badge), Status, Proof Source, Latency, Explorer Links. Sortable by timestamp. `data-testid="telemetry-table"` + `data-testid="operation-row"` for Playwright.
