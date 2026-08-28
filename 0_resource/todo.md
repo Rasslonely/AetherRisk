@@ -117,7 +117,7 @@
   - **IN-BROWSER CRYPTO**: Ephemeral keypair via `viem/accounts/privateKeyToAccount`. Static `eth_call` to CC3 RPC for precompile verification.
   - **ACCEPTANCE**: Full BEFORE→AFTER transition completes in < 15 seconds. Score reads "810" at end.
 
-- [ ] **Phase 16** → `app/components/risk-metric-radar.tsx` + `app/components/enclave-cert-modal.tsx`
+- [x] **Phase 16** → `app/components/risk-metric-radar.tsx` + `app/components/enclave-cert-modal.tsx`
   - **TARGET**: Bayesian health factor radar chart + TEE attestation certificate modal.
   - **IMPLEMENTS**:
     - `risk-metric-radar.tsx`: Radar/gauge visualization of Health Factor (0.87→1.84), Credit Score, APY, Collateral Ratio, Debt-to-Income.
