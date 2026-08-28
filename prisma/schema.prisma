@@ -1,0 +1,112 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum OperationType {
+  LOAN_REPAID
+  COLLATERAL_ADDED
+  DEBT_SETTLED
+  INVOICE_PAID
+  REBALANCE_TRIGGER
+  COLLATERAL_WITHDRAWN
+}
+
+enum OperationStatus {
+  PENDING_ATTESTATION
+  VERIFIED_PRECOMPILE
+  RISK_MUTATED
+  COMPLETED
+  FAILED
+}
+
+enum ProofSource {
+  LIVE_ATTESTCOIN
+  CACHED_REAL_PROOF
+  SANDBOX_SIMULATION
+}
+
+model Borrower {
+  id                String       @id @default(uuid())
+  address           String       @unique
+  name              String
+  sector            String
+  creditScore       Int          @default(620)
+  maxCreditLineUsd  Decimal      @default(1000000.00) @db.Decimal(18, 2)
+  currentDebtUsd    Decimal      @default(750000.00) @db.Decimal(18, 2)
+  collateralUsd     Decimal      @default(1200000.00) @db.Decimal(18, 2)
+  healthFactor      Decimal      @default(1.10) @db.Decimal(5, 2)
+  currentApyBps     Int          @default(920) // 9.20%
+  liquidationRisk   Boolean      @default(false)
+  updatedAt         DateTime     @updatedAt
+  createdAt         DateTime     @default(now())
+
+  operations        Operation[]
+
+  @@index([address])
+}
+
+model Operation {
+  id                String          @id @default(uuid())
+  txCode            String          @unique // e.g. #TX-901
+  borrowerId        String
+  borrowerAddress   String
+  borrowerName      String
+  sourceChain       String          @default("Ethereum Sepolia")
+  sourceChainId     Int             @default(11155111)
+  chainKey          Int             @default(1)
+  operationType     OperationType
+  provenAmountUsd   Decimal         @db.Decimal(18, 2)
+  assetSymbol       String          @default("USDC")
+  blockHeight       BigInt
+  sourceTxHash      String
+  creditcoinTxHash  String?
+  proverLatencySec  Decimal         @db.Decimal(4, 1) // e.g. 12.4s
+  creditScoreDelta  Int             // e.g. +42
+  oldScore          Int
+  newScore          Int
+  oldApyBps         Int
+  newApyBps         Int
+  status            OperationStatus @default(COMPLETED)
+  proofSource       ProofSource     @default(CACHED_REAL_PROOF)
+  merkleRoot        String
+  continuityDigest  String
+  timestamp         DateTime        @default(now())
+
+  borrower          Borrower        @relation(fields: [borrowerId], references: [id])
+
+  @@index([borrowerAddress])
+  @@index([status])
+  @@index([timestamp])
+}
+
+model CachedProof {
+  id                    String      @id @default(uuid())
+  txHash                String      @unique
+  chainKey              Int         @default(1)
+  blockHeight           BigInt
+  encodedTransactionHex String      @db.Text
+  merkleRoot            String
+  siblingsJson          Json
+  lowerEndpointDigest   String
+  continuityRootsJson   Json
+  proofSource           ProofSource @default(CACHED_REAL_PROOF)
+  generatedAt           DateTime    @default(now())
+
+  @@index([txHash])
+  @@index([chainKey, blockHeight])
+}
+
+model EnclaveSigner {
+  id              String   @id @default(uuid())
+  signerAddress   String   @unique
+  hardwareQuoteId String
+  measurementHash String
+  isActive        Boolean  @default(true)
+  registeredAt    DateTime @default(now())
+}
