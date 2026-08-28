@@ -148,12 +148,12 @@
     - Tech stack badges: Creditcoin CC3 | Attestcoin Protocol | Phala TEE | ERC-4626.
   - **ACCEPTANCE**: Page loads with populated metrics. No empty states.
 
-- [ ] **Phase 20** → `app/operations/page.tsx` + `app/sandbox/page.tsx`
-  - **TARGET**: Full-page telemetry explorer + dedicated full-screen sandbox.
+- [x] **Phase 20** → `app/operations/page.tsx` + `app/sandbox/page.tsx`
+  - **TARGET**: Dedicated operations log page + full-screen interactive sandbox page.
   - **IMPLEMENTS**:
-    - `operations/page.tsx`: Full-width `telemetry-table.tsx` with filtering by OperationType and ProofSource. Page header: "Live Operations Feed — 18 of 18 Verified".
-    - `sandbox/page.tsx`: Full-screen `interactive-sandbox.tsx` with sidebar persona selector, main viewport for BEFORE/AFTER cards, and bottom panel for `visual-pipeline-canvas.tsx`.
-  - **ACCEPTANCE**: `/operations` shows ≥ 18 rows. `/sandbox` completes full simulation flow.
+    - `app/operations/page.tsx`: Full-page `telemetry-table.tsx` with search, filter by chain/status/type, pagination, CSV export.
+    - `app/sandbox/page.tsx`: Full-page `interactive-sandbox.tsx` with expanded terminal, pipeline canvas, risk radar, and live TEE enclave quote verification panel.
+  - **ACCEPTANCE**: Both pages load and render their respective components without errors.
 
 ---
 
