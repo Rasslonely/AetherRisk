@@ -40,7 +40,7 @@ export async function signRiskMutation(
   const signerAddress = (await wallet.getAddress()) as `0x${string}`;
 
   const value = {
-    borrower: payload.borrower,
+    borrower: ethers.getAddress(payload.borrower.toLowerCase()),
     oldScore: payload.oldScore,
     newScore: payload.newScore,
     maxCreditLineUsd: payload.maxCreditLineUsd,

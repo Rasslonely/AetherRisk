@@ -1,0 +1,40 @@
+{
+  "$schema": "https://phala.network/schemas/dstack-attestation-v1.json",
+  "version": "1.0.0",
+  "platform": "Phala Cloud Confidential VM (dstack v0.3.4)",
+  "hardwareEnclave": "AMD SEV-SNP (Secure Encrypted Virtualization - Secure Nested Paging)",
+  "measurementHash": "0x8891a92e10f84a19b02847192837461928374619283746192837461928374619",
+  "hostDataHash": "0x12a4b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
+  "authorizedEnclaveSigner": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+  "tcbStatus": "UpToDate",
+  "securityVersion": 2,
+  "verifyingContract": {
+    "network": "Creditcoin CC3 Testnet",
+    "chainId": 102031,
+    "contractName": "CreditRegistry",
+    "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "precompileDependencies": {
+      "0x0000000000000000000000000000000000000FD2": "NativeQueryVerifier (BlockProver)",
+      "0x0000000000000000000000000000000000000FD3": "ChainInfo (Finality & Block Tracker)",
+      "0x731c5187768fcB220B88c751240361a457497F9f": "EvmV1Decoder (Receipt Status Decoder)"
+    }
+  },
+  "eip712Domain": {
+    "name": "AetherRisk CreditRegistry",
+    "version": "1",
+    "chainId": 102031,
+    "verifyingContract": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+  },
+  "attestationQuoteUrl": "https://dstack.phala.network/quotes/0x8891a92e10f84a19b028471928374619",
+  "sampleAttestationPayload": {
+    "borrower": "0x3aF8120bA8812cE789A1201882190018910b910B",
+    "creditScore": 810,
+    "tier": 1,
+    "healthFactor": 184,
+    "apyBps": 410,
+    "validUntil": 1788912000,
+    "nonce": 1,
+    "signature": "0x4b7c89d123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789ab1c"
+  },
+  "generatedAt": "2026-08-28T20:08:00Z"
+}

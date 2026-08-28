@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
     const maxCreditLineWei = ethers.parseUnits(newCreditLineUsd.toString(), 18);
 
     const value = {
-      borrower: persona.address,
+      borrower: ethers.getAddress(persona.address.toLowerCase()),
       oldScore,
       newScore,
       maxCreditLineUsd: maxCreditLineWei,

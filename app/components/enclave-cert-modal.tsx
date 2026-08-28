@@ -53,28 +53,24 @@ export function EnclaveCertModal({ isOpen, onClose }: EnclaveCertModalProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-black/85 backdrop-blur-2xl"
-          />
+  if (!isOpen) return null;
 
-          {/* Modal Content */}
-          <motion.div
-            data-testid="enclave-cert-modal"
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-            className="relative w-full max-w-2xl rounded-3xl border border-slate-800 bg-slate-950 p-6 md:p-8 backdrop-blur-2xl shadow-2xl overflow-hidden z-10"
-          >
+  return (
+    <div data-testid="enclave-cert-modal" className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        className="absolute inset-0 bg-black/85 backdrop-blur-2xl cursor-pointer"
+      />
+
+      {/* Modal Content */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+        className="relative w-full max-w-2xl rounded-3xl border border-slate-800 bg-slate-950 p-6 md:p-8 backdrop-blur-2xl shadow-2xl overflow-hidden z-10"
+      >
             {/* Doppelrand Inset Highlight */}
             <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
@@ -189,7 +185,5 @@ export function EnclaveCertModal({ isOpen, onClose }: EnclaveCertModalProps) {
             </div>
           </motion.div>
         </div>
-      )}
-    </AnimatePresence>
   );
 }

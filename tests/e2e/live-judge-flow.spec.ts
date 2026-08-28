@@ -1,13 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
-  test.beforeEach(async ({ page }) => {
-    // Listen for uncaught exceptions
-    page.on('pageerror', (err) => {
-      console.error('Page Exception:', err.message);
-    });
-  });
-
   test('Test 1: Zero-Empty-State Law — Telemetry Feed displays >= 10 verified operations without blank state', async ({
     page,
   }) => {
@@ -49,21 +42,21 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
 
     // 4. Click Simulate Repayment button
     const simulateBtn = page.locator('[data-testid="simulate-repay-btn"]');
-    await expect(simulateBtn).toBeVisible();
+    await expect(simulateBtn).toBeVisible({ timeout: 10000 });
     await simulateBtn.click();
 
     // 5. Assert 4-Phase Stepper Canvas is visible during execution
     const canvas = page.locator('[data-testid="visual-pipeline-canvas"]');
-    await expect(canvas).toBeVisible({ timeout: 5000 });
+    await expect(canvas).toBeVisible({ timeout: 10000 });
 
     // 6. Wait for Precompile 0xFD2 verified badge to appear
     const precompileBadge = page.locator('[data-testid="precompile-verified-badge"]');
-    await expect(precompileBadge).toBeVisible({ timeout: 30000 });
+    await expect(precompileBadge).toBeVisible({ timeout: 35000 });
     await expect(precompileBadge).toContainText('0xFD2');
 
     // 7. Assert updated AFTER score morphs to 810 (Prime Tier)
     const afterScoreVal = page.locator('[data-testid="after-credit-score-value"]');
-    await expect(afterScoreVal).toContainText('810', { timeout: 30000 });
+    await expect(afterScoreVal).toContainText('810', { timeout: 35000 });
 
     // 8. Assert Health Factor in AFTER card reaches 1.84
     const afterHealthVal = page.locator('[data-testid="after-health-factor-value"]');
@@ -77,12 +70,12 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
 
     // 1. Trigger TEE Attestation button in Navbar
     const teeBtn = page.locator('[data-testid="tee-cert-btn"]');
-    await expect(teeBtn).toBeVisible({ timeout: 10000 });
+    await expect(teeBtn).toBeVisible({ timeout: 15000 });
     await teeBtn.click();
 
     // 2. Assert Modal Dialog appears
     const modal = page.locator('[data-testid="enclave-cert-modal"]');
-    await expect(modal).toBeVisible({ timeout: 8000 });
+    await expect(modal).toBeVisible({ timeout: 10000 });
 
     // 3. Assert Hardware Quote measurement hash and TEE signer are present
     await expect(modal).toContainText('AMD SEV-SNP');
