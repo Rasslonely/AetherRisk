@@ -21,9 +21,9 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 - [x] **Phase 10: TypeScript Domain Models & 18 Pre-Seeded Records** - Create `types.ts` and `telemetry-seed.ts` with 18 verified records and 3 personas.
 - [x] **Phase 11: Database Seeding Execution (`seed-db.ts`)** - Seed Supabase PostgreSQL with 18 operations to fulfill Zero-Empty-State Law.
 
-### Stage 3: SDK Integration, Proof Resolver & API Core (Phases 12–13)
+### Stage 3: SDK Integration, Proof Resolver & API Core (Phases 12–13) — COMPLETE
 - [x] **Phase 12: Next.js Native API Route Handlers** - Implement `/api/operations`, `/api/proof`, and `/api/simulate`.
-- [ ] **Phase 13: SDK Wrapper, Triple-Layer Resolver & TEE Signer** - Build `lib/attestcoin.ts`, `lib/proof-resolver.ts`, and `lib/tee-signer.ts`.
+- [x] **Phase 13: SDK Wrapper, Triple-Layer Resolver & TEE Signer** - Build `lib/attestcoin.ts`, `lib/proof-resolver.ts`, and `lib/tee-signer.ts`.
 
 ### Stage 4: Premium UI, 4-Phase Stepper & Judge Sandbox (Phases 14–20)
 - [ ] **Phase 14: Visual 4-Phase Attestation Stepper Canvas** - Build `visual-pipeline-canvas.tsx` with Framer Motion animations.
@@ -54,7 +54,7 @@ AetherRisk executes across 5 Stages and 22 cohesive phases to construct a dual-e
 | 10. TypeScript Domain & Seed Data | 1/1 | Complete | 2026-08-28 |
 | 11. Database Seeding Execution | 1/1 | Complete | 2026-08-28 |
 | 12. API Route Handlers | 1/1 | Complete | 2026-08-28 |
-| 13. SDK Wrapper & Resolver | 0/1 | Not started | - |
+| 13. SDK Wrapper & Resolver | 1/1 | Complete | 2026-08-28 |
 | 14. 4-Phase Stepper Canvas | 0/1 | Not started | - |
 | 15. Interactive Sandbox | 0/1 | Not started | - |
 | 16. Radar & Enclave Modal | 0/1 | Not started | - |
