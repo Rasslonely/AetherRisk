@@ -108,30 +108,29 @@ export function InteractiveSandbox({
       setTimeout(() => setPipelinePhase(2), 600);
       setTimeout(() => setPipelinePhase(3), 1400);
 
-      // Trigger the backend simulation API with fallback
-      let data: any = null;
-      try {
-        const response = await fetch('/api/simulate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            borrowerAddress: selectedPersona.address,
-            personaId: selectedPersona.id,
-            action: selectedPersona.defaultAction,
-            amount: selectedPersona.defaultAmount,
-          }),
+      // Trigger the backend simulation API asynchronously
+      const simulatePromise = fetch('/api/simulate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          borrowerAddress: selectedPersona.address,
+          personaId: selectedPersona.id,
+          action: selectedPersona.defaultAction,
+          amount: selectedPersona.defaultAmount,
+        }),
+      })
+        .then((res) => (res.ok ? res.json() : null))
+        .catch((fetchErr) => {
+          console.warn('Simulation API offline fallback:', fetchErr);
+          return null;
         });
-        if (response.ok) {
-          data = await response.json();
-        }
-      } catch (fetchErr) {
-        console.warn('Simulation API offline fallback:', fetchErr);
-      }
 
       // Phase 4 (Precompile 0xFD2 Verified): 2400ms
-      setTimeout(() => {
+      setTimeout(async () => {
         setPipelinePhase(4);
         setSimulationState('RESOLVED');
+
+        const data = await simulatePromise;
 
         const targetScore = data?.afterState?.creditScore || selectedPersona.targetScore;
         const targetHealth =

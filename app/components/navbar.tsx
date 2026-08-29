@@ -43,10 +43,10 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-4 z-40 w-full px-4 mb-8">
-        <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 rounded-full border border-slate-800 bg-slate-950/85 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <header className="sticky top-3 z-40 w-full px-4 sm:px-6 lg:px-8 mb-8">
+        <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-7 py-2.5 rounded-2xl md:rounded-full border border-slate-800/80 bg-slate-950/90 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.6)] transition-all">
           {/* Logo & Network Status Badge */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-600 to-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)] group-hover:scale-105 transition-transform">
                 <Shield className="h-5 w-5 fill-slate-950" />
@@ -68,7 +68,7 @@ export function Navbar() {
           </div>
 
           {/* Nav Items */}
-          <div className="hidden md:flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded-full border border-slate-800">
+          <div className="hidden lg:flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded-full border border-slate-800/80 shadow-inner">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -88,7 +88,7 @@ export function Navbar() {
           </div>
 
           {/* Right Action Group: Verified Contracts, TEE Attestation & Wallet Connect */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* Verified Contracts Modal Trigger */}
             <button
               data-testid="verified-contracts-btn"

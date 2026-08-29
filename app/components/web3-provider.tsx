@@ -68,35 +68,34 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // 2. Fetch Account Balances (Native tCTC + iUSDC)
+  // 2. Fetch Account Balances (Native tCTC + iUSDC on Creditcoin CC3)
   const refreshBalances = useCallback(async () => {
-    if (!account || !provider) return;
+    if (!account) return;
 
     try {
-      // Native tCTC balance
-      const rawNative = await provider.getBalance(account);
+      // Query Creditcoin CC3 node directly for guaranteed accurate testnet balances
+      const cc3RpcProvider = new ethers.JsonRpcProvider(CREDITCOIN_CC3_TESTNET.rpcUrls[0]);
+
+      // Native tCTC balance on Creditcoin CC3
+      const rawNative = await cc3RpcProvider.getBalance(account);
       setNativeBalance(formatTokenBalance(rawNative, 18, 4));
 
-      // iUSDC token balance on CC3
-      if (chainId === CREDITCOIN_CC3_TESTNET.chainIdDecimal) {
-        try {
-          const usdcContract = new ethers.Contract(
-            CONTRACT_ADDRESSES.CC3.MOCK_IUSDC,
-            ERC20_ABI,
-            provider
-          );
-          const rawUsdc = await usdcContract.balanceOf(account);
-          setUsdcBalance(formatTokenBalance(rawUsdc, 18, 2));
-        } catch {
-          setUsdcBalance('0.00');
-        }
-      } else {
+      // iUSDC token balance on Creditcoin CC3
+      try {
+        const usdcContract = new ethers.Contract(
+          CONTRACT_ADDRESSES.CC3.MOCK_IUSDC,
+          ERC20_ABI,
+          cc3RpcProvider
+        );
+        const rawUsdc = await usdcContract.balanceOf(account);
+        setUsdcBalance(formatTokenBalance(rawUsdc, 18, 2));
+      } catch {
         setUsdcBalance('0.00');
       }
     } catch (err: any) {
-      console.warn('Error fetching Web3 balances:', err);
+      console.warn('Error fetching Web3 balances from CC3 RPC:', err);
     }
-  }, [account, provider, chainId]);
+  }, [account]);
 
   // 3. Switch / Add Creditcoin CC3 Network
   const switchNetwork = useCallback(async () => {
@@ -113,6 +112,10 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         params: [{ chainId: CREDITCOIN_CC3_TESTNET.chainId }],
       });
       setError(null);
+      setChainId(CREDITCOIN_CC3_TESTNET.chainIdDecimal);
+      const newProvider = new ethers.BrowserProvider(targetProvider, 'any');
+      setProvider(newProvider);
+      refreshBalances();
     } catch (switchErr: any) {
       // Error 4902 means the chain has not been added to the wallet
       if (switchErr.code === 4902 || switchErr.data?.originalError?.code === 4902) {
@@ -130,6 +133,10 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
             ],
           });
           setError(null);
+          setChainId(CREDITCOIN_CC3_TESTNET.chainIdDecimal);
+          const newProvider = new ethers.BrowserProvider(targetProvider, 'any');
+          setProvider(newProvider);
+          refreshBalances();
         } catch (addErr: any) {
           console.error('Failed to add Creditcoin CC3 network:', addErr);
           setError(addErr.message || 'Failed to add Creditcoin CC3 network');
@@ -139,7 +146,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         setError(switchErr.message || 'Failed to switch network');
       }
     }
-  }, [rawEipProvider]);
+  }, [rawEipProvider, refreshBalances]);
 
   // 4. Connect Wallet (EIP-6963 selected or fallback)
   const connectWallet = useCallback(
@@ -177,7 +184,8 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         setRawEipProvider(selectedProvider);
         setActiveWalletInfo(selectedInfo);
 
-        const browserProvider = new ethers.BrowserProvider(selectedProvider);
+        // Use 'any' network to avoid ethers v6 NETWORK_ERROR on chain changes
+        const browserProvider = new ethers.BrowserProvider(selectedProvider, 'any');
         const accounts = await browserProvider.send('eth_requestAccounts', []);
 
         if (!accounts || accounts.length === 0) {
@@ -199,6 +207,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: CREDITCOIN_CC3_TESTNET.chainId }],
             });
+            setChainId(CREDITCOIN_CC3_TESTNET.chainIdDecimal);
           } catch (autoSwitchErr: any) {
             console.warn('Auto network switch on connect rejected:', autoSwitchErr);
           }
@@ -237,12 +246,23 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    const handleChainChanged = (chainIdHex: string) => {
-      const parsedChainId = parseInt(chainIdHex, 16);
+    const handleChainChanged = async (chainIdHex: string) => {
+      const parsedChainId =
+        typeof chainIdHex === 'string' && chainIdHex.startsWith('0x')
+          ? parseInt(chainIdHex, 16)
+          : Number(chainIdHex);
       setChainId(parsedChainId);
-      if (provider) {
-        provider.getNetwork().then((net) => setChainId(Number(net.chainId)));
+
+      // Re-initialize provider on new chain to prevent ethers v6 NETWORK_ERROR
+      const newProvider = new ethers.BrowserProvider(rawEipProvider, 'any');
+      setProvider(newProvider);
+      try {
+        const newSigner = await newProvider.getSigner();
+        setSigner(newSigner);
+      } catch {
+        // Signer re-fetch fallback
       }
+      refreshBalances();
     };
 
     if (rawEipProvider.on) {
@@ -256,16 +276,16 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         rawEipProvider.removeListener('chainChanged', handleChainChanged);
       }
     };
-  }, [rawEipProvider, provider, disconnectWallet]);
+  }, [rawEipProvider, disconnectWallet, refreshBalances]);
 
   // 7. Balance Polling Effect
   useEffect(() => {
-    if (account && provider) {
+    if (account) {
       refreshBalances();
-      const interval = setInterval(refreshBalances, 12000);
+      const interval = setInterval(refreshBalances, 10000);
       return () => clearInterval(interval);
     }
-  }, [account, provider, chainId, refreshBalances]);
+  }, [account, chainId, refreshBalances]);
 
   const value: Web3ContextValue = {
     account,
