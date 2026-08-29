@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { EnclaveCertModal } from './enclave-cert-modal';
 import { VerifiedContractsModal } from './verified-contracts-modal';
+import { ConnectWalletButton } from './connect-wallet-button';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -86,7 +87,7 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Right Action Modals: Verified Contracts & TEE Attestation */}
+          {/* Right Action Group: Verified Contracts, TEE Attestation & Wallet Connect */}
           <div className="flex items-center gap-2">
             {/* Verified Contracts Modal Trigger */}
             <button
@@ -96,8 +97,8 @@ export function Navbar() {
               title="View Deployed Smart Contracts"
             >
               <Layers className="h-3.5 w-3.5 text-cyan-400" />
-              <span className="hidden lg:inline">Verified Contracts</span>
-              <span className="lg:hidden">Contracts</span>
+              <span className="hidden xl:inline">Verified Contracts</span>
+              <span className="xl:hidden hidden sm:inline">Contracts</span>
             </button>
 
             {/* TEE Attestation Modal Trigger */}
@@ -108,20 +109,11 @@ export function Navbar() {
               title="Inspect AMD SEV-SNP Remote Attestation"
             >
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">TEE Attestation</span>
+              <span className="hidden md:inline">TEE Attestation</span>
             </button>
 
-            {/* Network Explorer Pill */}
-            <a
-              href="https://creditcoin-testnet.blockscout.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden xl:flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-cyan-400 bg-slate-900/80 px-2.5 py-1.5 rounded-full border border-slate-800 transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <span>Chain 102031</span>
-              <ExternalLink className="h-2.5 w-2.5 ml-0.5" />
-            </a>
+            {/* Connect Wallet Button */}
+            <ConnectWalletButton />
           </div>
         </nav>
       </header>

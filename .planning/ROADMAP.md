@@ -2,7 +2,7 @@
 
 ## Milestone v3.0: Remnara-Grade Hybrid Web3 dApp, Multi-Wallet Connect & Live Vault Operations
 
-- [ ] **Phase 27** → `Multi-Wallet Web3 Provider & CC3 Auto-Switcher`
+- [x] **Phase 27** → `Multi-Wallet Web3 Provider & CC3 Auto-Switcher`
   - **TARGET**: Build `Web3Provider` context supporting EIP-6963 multi-wallet discovery (MetaMask, Rabby, OKX, Coinbase, Phantom), auto-switch to Creditcoin CC3 (`102031`), and balance listeners.
   - **FILES**: `app/components/web3-provider.tsx`, `app/components/connect-wallet-button.tsx`, `app/components/wallet-modal.tsx`, `lib/web3-config.ts`.
 

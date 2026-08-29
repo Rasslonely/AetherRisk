@@ -8,10 +8,10 @@ Milestone v3.0 elevates AetherRisk from an interactive simulator into a **full-f
 ## Functional Requirements
 
 ### 1. Multi-Wallet Web3 Provider & Network Switcher
-- [ ] **REQ-W3-01**: Implement `Web3Provider` context with EIP-6963 multi-injected provider discovery (MetaMask, Rabby, Coinbase Wallet, OKX, Phantom).
-- [ ] **REQ-W3-02**: Provide seamless network auto-switching to Creditcoin CC3 Testnet (`Chain ID: 102031`, RPC: `https://rpc.cc3-testnet.creditcoin.network/`, Blockscout: `https://creditcoin-testnet.blockscout.com/`).
-- [ ] **REQ-W3-03**: Real-time connected account balance polling (Native `tCTC` + ERC-20 `iUSDC`).
-- [ ] **REQ-W3-04**: Interactive Wallet Modal in Navbar displaying address avatar, network badge, tCTC balance, copy address, disconnect, and faucet trigger.
+- [x] **REQ-W3-01**: Implement `Web3Provider` context with EIP-6963 multi-injected provider discovery (MetaMask, Rabby, Coinbase Wallet, OKX, Phantom).
+- [x] **REQ-W3-02**: Provide seamless network auto-switching to Creditcoin CC3 Testnet (`Chain ID: 102031`, RPC: `https://rpc.cc3-testnet.creditcoin.network/`, Blockscout: `https://creditcoin-testnet.blockscout.com/`).
+- [x] **REQ-W3-03**: Real-time connected account balance polling (Native `tCTC` + ERC-20 `iUSDC`).
+- [x] **REQ-W3-04**: Interactive Wallet Modal in Navbar displaying address avatar, network badge, tCTC balance, copy address, disconnect, and faucet trigger.
 
 ### 2. 1-Click Institutional Capital Faucet
 - [ ] **REQ-FAUCET-01**: Build `FaucetModal` enabling any connected judge/user wallet to claim 10,000 `iUSDC` directly from deployed `MockInstitutionalUSDC.sol` (`0xb906ae7ec832814922FCEEd270e0A7A1A2657397`).

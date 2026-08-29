@@ -117,4 +117,30 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
       await closeBtn.click();
     }
   });
+
+  test('Test 5: Multi-Wallet Web3 Provider & CC3 Switcher Modal — EIP-6963 Discovery & Network Parameters', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    // 1. Assert Connect Wallet button exists in Navbar
+    const connectBtn = page.locator('[data-testid="connect-wallet-btn"]');
+    await expect(connectBtn).toBeVisible({ timeout: 15000 });
+    await expect(connectBtn).toContainText('Connect Wallet');
+
+    // 2. Click Connect Wallet to open Modal
+    await connectBtn.click();
+
+    // 3. Assert WalletModal renders with EIP-6963 and CC3 details
+    const modal = page.locator('[data-testid="wallet-modal"]');
+    await expect(modal).toBeVisible({ timeout: 10000 });
+    await expect(modal).toContainText('Creditcoin CC3');
+    await expect(modal).toContainText('102031');
+
+    // 4. Close modal
+    const closeBtn = modal.locator('button:has-text("Close")');
+    if (await closeBtn.isVisible()) {
+      await closeBtn.click();
+    }
+  });
 });

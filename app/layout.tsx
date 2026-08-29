@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Navbar } from './components/navbar';
+import { Web3Provider } from './components/web3-provider';
 import { Shield, ExternalLink, Cpu, Layers, Lock, Zap } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -50,13 +51,16 @@ export default function RootLayout({
           <div className="absolute top-2/3 -right-48 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
         </div>
 
-        {/* Floating Top Navigation */}
-        <Navbar />
+        {/* Web3 Provider Layer */}
+        <Web3Provider>
+          {/* Floating Top Navigation */}
+          <Navbar />
 
-        {/* Main Body Content */}
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 relative z-10">
-          {children}
-        </main>
+          {/* Main Body Content */}
+          <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 relative z-10">
+            {children}
+          </main>
+        </Web3Provider>
 
         {/* Institutional Footer */}
         <footer className="relative z-10 w-full border-t border-slate-800/80 bg-slate-950/90 py-10 mt-24 backdrop-blur-xl">
