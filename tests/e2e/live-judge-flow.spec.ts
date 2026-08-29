@@ -143,4 +143,33 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
       await closeBtn.click();
     }
   });
+
+  test('Test 6: 1-Click Institutional Faucet Modal — 10,000 iUSDC Capital Provisioning & CC3 Gas', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    // 1. Trigger Faucet button in Navbar
+    const faucetBtn = page.locator('[data-testid="faucet-modal-btn"]');
+    await expect(faucetBtn).toBeVisible({ timeout: 15000 });
+    await expect(faucetBtn).toContainText('Claim 10k iUSDC');
+    await faucetBtn.click();
+
+    // 2. Assert FaucetModal renders
+    const modal = page.locator('[data-testid="faucet-modal"]');
+    await expect(modal).toBeVisible({ timeout: 10000 });
+    await expect(modal).toContainText('10,000 iUSDC');
+    await expect(modal).toContainText('Creditcoin CC3');
+    await expect(modal).toContainText('102031');
+
+    // 3. Assert Claim action button exists
+    const claimBtn = modal.locator('[data-testid="faucet-claim-btn"]');
+    await expect(claimBtn).toBeVisible();
+
+    // 4. Close modal
+    const closeBtn = modal.locator('button:has-text("Close")').or(modal.locator('button:has(svg.lucide-x)'));
+    if (await closeBtn.first().isVisible()) {
+      await closeBtn.first().click();
+    }
+  });
 });

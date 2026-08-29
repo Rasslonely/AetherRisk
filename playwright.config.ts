@@ -12,7 +12,7 @@ export default defineConfig({
     timeout: 15000,
   },
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3005',
     trace: 'off',
     headless: true,
     viewport: { width: 1440, height: 900 },
@@ -24,9 +24,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: true,
+    command: 'next dev -p 3005',
+    url: 'http://localhost:3005',
+    reuseExistingServer: false,
     timeout: 60000,
   },
 });

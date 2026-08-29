@@ -14,8 +14,8 @@ Milestone v3.0 elevates AetherRisk from an interactive simulator into a **full-f
 - [x] **REQ-W3-04**: Interactive Wallet Modal in Navbar displaying address avatar, network badge, tCTC balance, copy address, disconnect, and faucet trigger.
 
 ### 2. 1-Click Institutional Capital Faucet
-- [ ] **REQ-FAUCET-01**: Build `FaucetModal` enabling any connected judge/user wallet to claim 10,000 `iUSDC` directly from deployed `MockInstitutionalUSDC.sol` (`0xb906ae7ec832814922FCEEd270e0A7A1A2657397`).
-- [ ] **REQ-FAUCET-02**: Live transaction confirmation toast with direct Blockscout explorer link and automatic wallet balance refresh.
+- [x] **REQ-FAUCET-01**: Build `FaucetModal` enabling any connected judge/user wallet to claim 10,000 `iUSDC` directly from deployed `MockInstitutionalUSDC.sol` (`0xb906ae7ec832814922FCEEd270e0A7A1A2657397`).
+- [x] **REQ-FAUCET-02**: Live transaction confirmation toast with direct Blockscout explorer link and automatic wallet balance refresh.
 
 ### 3. Live Institutional Lending Vault Portal (`/vault`)
 - [ ] **REQ-VAULT-01**: Interactive multi-tranche yield venue interface connected directly to `AetherVault4626.sol` (`0xD9B3F2C699fCfC219d35F7709245312a621eFd39`):

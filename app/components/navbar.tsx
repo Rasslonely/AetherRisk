@@ -15,23 +15,29 @@ import {
 } from 'lucide-react';
 import { EnclaveCertModal } from './enclave-cert-modal';
 import { VerifiedContractsModal } from './verified-contracts-modal';
+import { FaucetModal } from './faucet-modal';
 import { ConnectWalletButton } from './connect-wallet-button';
+import { Coins } from 'lucide-react';
 
 export function Navbar() {
   const pathname = usePathname();
   const [certModalOpen, setCertModalOpen] = useState(false);
   const [contractsModalOpen, setContractsModalOpen] = useState(false);
+  const [faucetModalOpen, setFaucetModalOpen] = useState(false);
 
   React.useEffect(() => {
     const handleOpenContracts = () => setContractsModalOpen(true);
     const handleOpenTEE = () => setCertModalOpen(true);
+    const handleOpenFaucet = () => setFaucetModalOpen(true);
 
     window.addEventListener('open-verified-contracts', handleOpenContracts);
     window.addEventListener('open-tee-attestation', handleOpenTEE);
+    window.addEventListener('open-faucet', handleOpenFaucet);
 
     return () => {
       window.removeEventListener('open-verified-contracts', handleOpenContracts);
       window.removeEventListener('open-tee-attestation', handleOpenTEE);
+      window.removeEventListener('open-faucet', handleOpenFaucet);
     };
   }, []);
 
@@ -87,8 +93,20 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Right Action Group: Verified Contracts, TEE Attestation & Wallet Connect */}
+          {/* Right Action Group: Verified Contracts, TEE Attestation, Faucet & Wallet Connect */}
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* 1-Click Faucet Trigger */}
+            <button
+              data-testid="faucet-modal-btn"
+              onClick={() => setFaucetModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-cyan-300 bg-cyan-950/70 hover:bg-cyan-900/80 border border-cyan-500/30 hover:border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all hover:scale-[1.02] active:scale-[0.98]"
+              title="Claim 10,000 iUSDC Testnet Capital on Creditcoin CC3"
+            >
+              <Coins className="h-3.5 w-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Claim 10k iUSDC</span>
+              <span className="sm:hidden">Faucet</span>
+            </button>
+
             {/* Verified Contracts Modal Trigger */}
             <button
               data-testid="verified-contracts-btn"
@@ -98,7 +116,7 @@ export function Navbar() {
             >
               <Layers className="h-3.5 w-3.5 text-cyan-400" />
               <span className="hidden xl:inline">Verified Contracts</span>
-              <span className="xl:hidden hidden sm:inline">Contracts</span>
+              <span className="xl:hidden hidden md:inline">Contracts</span>
             </button>
 
             {/* TEE Attestation Modal Trigger */}
@@ -109,7 +127,7 @@ export function Navbar() {
               title="Inspect AMD SEV-SNP Remote Attestation"
             >
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-              <span className="hidden md:inline">TEE Attestation</span>
+              <span className="hidden lg:inline">TEE Attestation</span>
             </button>
 
             {/* Connect Wallet Button */}
@@ -117,6 +135,9 @@ export function Navbar() {
           </div>
         </nav>
       </header>
+
+      {/* 1-Click Institutional Faucet Modal */}
+      <FaucetModal isOpen={faucetModalOpen} onClose={() => setFaucetModalOpen(false)} />
 
       {/* TEE Remote Attestation Modal */}
       <EnclaveCertModal isOpen={certModalOpen} onClose={() => setCertModalOpen(false)} />

@@ -6,9 +6,9 @@
   - **TARGET**: Build `Web3Provider` context supporting EIP-6963 multi-wallet discovery (MetaMask, Rabby, OKX, Coinbase, Phantom), auto-switch to Creditcoin CC3 (`102031`), and balance listeners.
   - **FILES**: `app/components/web3-provider.tsx`, `app/components/connect-wallet-button.tsx`, `app/components/wallet-modal.tsx`, `lib/web3-config.ts`.
 
-- [ ] **Phase 28** → `1-Click Institutional Faucet & Testnet Capital Minter`
+- [x] **Phase 28** → `1-Click Institutional Faucet & Testnet Capital Minter`
   - **TARGET**: Build `FaucetModal` and contract helper for `MockInstitutionalUSDC.sol` (`0xb906ae7ec832814922FCEEd270e0A7A1A2657397`), enabling 1-click 10,000 iUSDC minting with live explorer toast notifications.
-  - **FILES**: `app/components/faucet-modal.tsx`, `lib/contracts/mock-usdc.ts`.
+  - **FILES**: `app/api/faucet/route.ts`, `app/components/faucet-modal.tsx`, `lib/contracts/mock-usdc.ts`.
 
 - [ ] **Phase 29** → `Live Institutional Lending Desk & AetherVault4626 Portal`
   - **TARGET**: Create `/vault` page with live smart contract interaction with `AetherVault4626.sol` (`0xD9B3F2C699fCfC219d35F7709245312a621eFd39`): Deposit iUSDC, Borrow Capital, Repay Debt, and Withdraw Liquidity with real-time on-chain position tracking.
