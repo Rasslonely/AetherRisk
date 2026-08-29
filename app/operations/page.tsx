@@ -20,7 +20,7 @@ export default function OperationsPage() {
     {
       label: 'Verified Operations',
       value: '18 of 18',
-      desc: '100% CC3 Verified',
+      desc: 'Creditcoin CC3 Verified',
       icon: ShieldCheck,
       color: 'emerald',
     },
@@ -64,10 +64,10 @@ export default function OperationsPage() {
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                 <Layers className="h-3 w-3" />
-                Live Audit Stream
+                Live Operations Stream
               </span>
               <span className="text-xs px-2.5 py-0.5 rounded-full font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Zero-Empty-State Law
+                Audited Dataset
               </span>
             </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 tracking-tight">
@@ -119,7 +119,7 @@ export default function OperationsPage() {
                   <span className="text-base font-bold font-mono text-slate-100 block">
                     {chip.value}
                   </span>
-                  <span className="text-[10px] font-mono text-slate-500 block">
+                  <span className="text-[10px] text-slate-500 font-mono block mt-0.5">
                     {chip.desc}
                   </span>
                 </div>
@@ -129,14 +129,11 @@ export default function OperationsPage() {
         </div>
       </motion.div>
 
-      {/* Main Full-Width Telemetry Table */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <TelemetryTable showFilters={true} />
-      </motion.div>
+      {/* Main Filterable Table Component */}
+      <TelemetryTable
+        title="Live Operations Telemetry Stream"
+        subtitle="18 Historical Cross-Chain Credit Events Synchronously Verified on Creditcoin CC3"
+      />
     </div>
   );
 }

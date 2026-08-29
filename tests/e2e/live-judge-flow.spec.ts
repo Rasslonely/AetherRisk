@@ -88,4 +88,33 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
       await closeBtn.click();
     }
   });
+
+  test('Test 4: Verified On-Chain Contracts Explorer Modal — 5 Contracts on Creditcoin CC3 & Sepolia', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    // 1. Trigger Verified Contracts button in Navbar
+    const contractsBtn = page.locator('[data-testid="verified-contracts-btn"]');
+    await expect(contractsBtn).toBeVisible({ timeout: 15000 });
+    await contractsBtn.click();
+
+    // 2. Assert Modal Dialog appears
+    const modal = page.locator('[data-testid="verified-contracts-modal"]');
+    await expect(modal).toBeVisible({ timeout: 10000 });
+
+    // 3. Assert all deployed contract addresses exist
+    await expect(modal).toContainText('CreditRegistry.sol');
+    await expect(modal).toContainText('AetherRiskASC.sol');
+    await expect(modal).toContainText('AetherVault4626.sol');
+    await expect(modal).toContainText('MockInstitutionalUSDC.sol');
+    await expect(modal).toContainText('SepoliaLendingEmitter.sol');
+    await expect(modal).toContainText('0x592380E737758285C809F92e8De176C7ECBC1015');
+
+    // 4. Close modal
+    const closeBtn = modal.locator('button:has-text("Close")');
+    if (await closeBtn.isVisible()) {
+      await closeBtn.click();
+    }
+  });
 });

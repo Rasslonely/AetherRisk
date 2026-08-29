@@ -59,7 +59,7 @@ export default function RootLayout({
         </main>
 
         {/* Institutional Footer */}
-        <footer className="relative z-10 w-full border-t border-slate-800/80 bg-slate-950/90 py-10 mt-16 backdrop-blur-xl">
+        <footer className="relative z-10 w-full border-t border-slate-800/80 bg-slate-950/90 py-10 mt-24 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-cyan-600 to-emerald-500 text-slate-950">
@@ -69,8 +69,8 @@ export default function RootLayout({
                 <span className="font-bold text-sm text-slate-200">
                   Aether<span className="text-cyan-400">Risk</span>
                 </span>
-                <p className="text-[11px] text-slate-500">
-                  BUIDL CTC 2026 Hackathon • Grand-Prize Core Architecture
+                <p className="text-[11px] text-slate-500 font-mono">
+                  Autonomous Cross-Chain Credit Risk Engine · Creditcoin CC3
                 </p>
               </div>
             </div>
@@ -92,7 +92,7 @@ export default function RootLayout({
             </div>
 
             <p className="text-xs text-slate-500 font-mono text-center md:text-right">
-              Deterministic Underwriting • Zero-Oracle-Latency
+              Substrate EVM 0xFD2 · Phala AMD SEV-SNP TEE
             </p>
           </div>
         </footer>

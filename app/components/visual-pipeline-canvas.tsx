@@ -109,7 +109,7 @@ export function VisualPipelineCanvas({
             >
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
               <span data-testid="precompile-verified-badge">
-                ✅ Verified by Native Precompile 0xFD2 ({latencySec}s)
+                Verified by Native Precompile 0xFD2 ({latencySec}s)
               </span>
             </motion.div>
           ) : isSimulating || phase > 0 ? (
@@ -147,15 +147,15 @@ export function VisualPipelineCanvas({
                     ? 'rgba(16, 185, 129, 0.4)'
                     : 'rgba(6, 182, 212, 0.4)'
                   : isActive
-                  ? 'rgba(6, 182, 212, 0.6)'
-                  : 'rgba(30, 41, 59, 0.6)',
+                    ? 'rgba(6, 182, 212, 0.6)'
+                    : 'rgba(30, 41, 59, 0.6)',
                 backgroundColor: isComplete
                   ? p.id === 4
                     ? 'rgba(6, 78, 59, 0.15)'
                     : 'rgba(8, 51, 68, 0.15)'
                   : isActive
-                  ? 'rgba(15, 23, 42, 0.9)'
-                  : 'rgba(15, 23, 42, 0.4)',
+                    ? 'rgba(15, 23, 42, 0.9)'
+                    : 'rgba(15, 23, 42, 0.4)',
               }}
               transition={{ duration: 0.3 }}
               className="relative flex flex-col justify-between rounded-xl border p-4 backdrop-blur-sm"
@@ -164,9 +164,8 @@ export function VisualPipelineCanvas({
               {idx < 3 && (
                 <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
                   <ArrowRight
-                    className={`h-4 w-4 transition-colors ${
-                      phase > p.id ? 'text-cyan-400' : 'text-slate-700'
-                    }`}
+                    className={`h-4 w-4 transition-colors ${phase > p.id ? 'text-cyan-400' : 'text-slate-700'
+                      }`}
                   />
                 </div>
               )}
@@ -174,34 +173,31 @@ export function VisualPipelineCanvas({
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span
-                    className={`text-[11px] font-mono px-2 py-0.5 rounded ${
-                      isComplete
+                    className={`text-[11px] font-mono px-2 py-0.5 rounded ${isComplete
                         ? 'bg-emerald-500/20 text-emerald-400'
                         : isActive
-                        ? 'bg-cyan-500/20 text-cyan-400'
-                        : 'bg-slate-800 text-slate-500'
-                    }`}
+                          ? 'bg-cyan-500/20 text-cyan-400'
+                          : 'bg-slate-800 text-slate-500'
+                      }`}
                   >
                     {p.timing}
                   </span>
 
                   <div
-                    className={`flex h-7 w-7 items-center justify-center rounded-lg ${
-                      isComplete
+                    className={`flex h-7 w-7 items-center justify-center rounded-lg ${isComplete
                         ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                         : isActive
-                        ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 animate-pulse'
-                        : 'bg-slate-800/60 text-slate-600 border border-slate-800'
-                    }`}
+                          ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 animate-pulse'
+                          : 'bg-slate-800/60 text-slate-600 border border-slate-800'
+                      }`}
                   >
                     <Icon className="h-3.5 w-3.5" />
                   </div>
                 </div>
 
                 <h4
-                  className={`text-xs font-semibold tracking-wide ${
-                    isComplete ? 'text-slate-100' : isActive ? 'text-cyan-300' : 'text-slate-400'
-                  }`}
+                  className={`text-xs font-semibold tracking-wide ${isComplete ? 'text-slate-100' : isActive ? 'text-cyan-300' : 'text-slate-400'
+                    }`}
                 >
                   {p.title}
                 </h4>
@@ -214,13 +210,12 @@ export function VisualPipelineCanvas({
               {/* Card Footer / Status / Link */}
               <div className="mt-3 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[10px]">
                 <span
-                  className={`font-mono uppercase ${
-                    isComplete
+                  className={`font-mono uppercase ${isComplete
                       ? 'text-emerald-400 font-semibold'
                       : isActive
-                      ? 'text-cyan-400 font-semibold animate-pulse'
-                      : 'text-slate-600'
-                  }`}
+                        ? 'text-cyan-400 font-semibold animate-pulse'
+                        : 'text-slate-600'
+                    }`}
                 >
                   {isComplete ? '● Complete' : isActive ? '● In Progress' : '○ Standby'}
                 </span>

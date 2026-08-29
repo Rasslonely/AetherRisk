@@ -13,6 +13,7 @@
     "contracts:test": "cd contracts && forge test"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@neondatabase/serverless": "^0.10.4",
     "@prisma/client": "^6.0.0",
     "@radix-ui/react-dialog": "^1.1.2",

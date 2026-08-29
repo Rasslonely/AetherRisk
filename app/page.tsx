@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -18,12 +18,14 @@ import {
   ShieldCheck,
   Building2,
   Clock,
+  Code2,
 } from 'lucide-react';
 import { InteractiveSandbox } from './components/interactive-sandbox';
 import { RiskMetricRadar } from './components/risk-metric-radar';
 import { TelemetryTable } from './components/telemetry-table';
 
 export default function HomePage() {
+
   const kpiStats = [
     {
       label: 'Total Volume Proven',
@@ -68,8 +70,8 @@ export default function HomePage() {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium bg-gradient-to-r from-cyan-500/15 to-emerald-500/15 text-cyan-300 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.2)]"
         >
-          <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
-          <span>BUIDL CTC 2026 • GRAND-PRIZE ARCHITECTURE</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Creditcoin CC3 Testnet · Substrate Precompile 0xFD2</span>
         </motion.div>
 
         <motion.h1
@@ -103,23 +105,24 @@ export default function HomePage() {
         >
           <a
             href="#sandbox-section"
-            className="flex items-center gap-2.5 px-6 py-3.5 rounded-full text-sm font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-[0_0_25px_rgba(6,182,212,0.4)] transition-all hover:scale-[1.03] active:scale-[0.98]"
+            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:scale-105 active:scale-95 transition-all"
           >
-            <span>Launch 30s Sandbox</span>
-            <ArrowRight className="h-4 w-4" />
+            <Zap className="h-4 w-4 fill-slate-950" />
+            <span>Launch Risk Sandbox</span>
+            <ArrowRight className="h-4 w-4 ml-1" />
           </a>
 
           <Link
             href="/operations"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-medium bg-slate-900/90 hover:bg-slate-800 border border-slate-800 text-slate-200 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-slate-300 hover:text-slate-100 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 backdrop-blur-md transition-all hover:scale-105"
           >
             <Layers className="h-4 w-4 text-cyan-400" />
-            <span>Explore 18 Verified Operations</span>
+            <span>Explore Verified Operations</span>
           </Link>
         </motion.div>
       </section>
 
-      {/* 2. KPI METRICS GRID */}
+      {/* 2. INSTITUTIONAL KPI STATS ROW */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpiStats.map((stat, idx) => {
           const Icon = stat.icon;
@@ -129,22 +132,22 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * idx }}
-              className="relative rounded-2xl border border-slate-800 bg-slate-950/80 p-5 backdrop-blur-xl shadow-xl overflow-hidden group hover:border-slate-700 transition-all"
+              className="relative rounded-2xl border border-slate-800 bg-slate-950/70 p-5 backdrop-blur-xl shadow-lg hover:border-slate-700 transition-colors group"
             >
               {/* Double Bezel Inset Highlight */}
               <div className="absolute inset-0 rounded-2xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-400">{stat.label}</span>
+                <span className="text-xs text-slate-400 font-medium">{stat.label}</span>
                 <div
-                  className={`flex h-8 w-8 items-center justify-center rounded-xl ${
+                  className={`flex h-8 w-8 items-center justify-center rounded-lg ${
                     stat.accent === 'cyan'
-                      ? 'bg-cyan-950 border border-cyan-500/30 text-cyan-400'
+                      ? 'bg-cyan-950/80 text-cyan-400 border border-cyan-500/30'
                       : stat.accent === 'emerald'
-                      ? 'bg-emerald-950 border border-emerald-500/30 text-emerald-400'
+                      ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/30'
                       : stat.accent === 'purple'
-                      ? 'bg-purple-950 border border-purple-500/30 text-purple-400'
-                      : 'bg-amber-950 border border-amber-500/30 text-amber-400'
+                      ? 'bg-purple-950/80 text-purple-400 border border-purple-500/30'
+                      : 'bg-amber-950/80 text-amber-400 border border-amber-500/30'
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -165,7 +168,7 @@ export default function HomePage() {
         })}
       </section>
 
-      {/* 3. FLAGSHIP INTERACTIVE SANDBOX (ENGINE 2) */}
+      {/* 3. FLAGSHIP INTERACTIVE SANDBOX */}
       <section id="sandbox-section" className="space-y-4">
         <InteractiveSandbox />
       </section>
@@ -179,14 +182,14 @@ export default function HomePage() {
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <ShieldCheck className="h-3 w-3" />
-              Dual-Engine Grand-Prize Core
+              Synchronous Architecture
             </span>
           </div>
           <h2 className="text-2xl font-bold text-slate-100 mt-2 tracking-tight">
             Dual-Engine Architectural Matrix
           </h2>
           <p className="text-xs md:text-sm text-slate-400 mt-0.5">
-            Engine 1 delivers hard-tech Substrate precompile primitives; Engine 2 provides frictionless in-browser risk underwriting.
+            Engine 1 delivers hard-tech Substrate precompile primitives; Engine 2 provides confidential TEE risk underwriting.
           </p>
         </div>
 
@@ -305,6 +308,35 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* 6. REMNARA-STYLE BOTTOM VERIFIED CONTRACTS DRAWER TRIGGER BANNER */}
+      <section className="relative rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-6 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3 text-left">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shrink-0">
+            <Code2 className="h-5 w-5" />
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-slate-100 flex items-center gap-2">
+              Smart Contracts Deployed & Verified On-Chain
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                5 Contracts
+              </span>
+            </h4>
+            <p className="text-xs text-slate-400">
+              Live on Creditcoin CC3 Testnet (102031) and Ethereum Sepolia (11155111).
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('open-verified-contracts'))}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 transition-all hover:scale-105 shrink-0"
+        >
+          <Layers className="h-4 w-4 text-cyan-400" />
+          <span>View Verified Contracts</span>
+          <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
+        </button>
       </section>
     </div>
   );

@@ -107,7 +107,7 @@ export function TelemetryTable({
   const proofSources: { label: string; value: string }[] = [
     { label: 'All Sources', value: 'ALL' },
     { label: 'Live Prover', value: 'LIVE_ATTESTCOIN' },
-    { label: 'Pre-Seeded Real', value: 'CACHED_REAL_PROOF' },
+    { label: 'Attested Dataset', value: 'CACHED_REAL_PROOF' },
   ];
 
   return (
@@ -124,10 +124,10 @@ export function TelemetryTable({
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
               <Zap className="h-3 w-3" />
-              Real-Time Cross-Chain Telemetry
+              Verified Operations Stream
             </span>
             <span className="text-xs px-2.5 py-0.5 rounded-full font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              Zero-Empty-State Law Active
+              Substrate 0xFD2
             </span>
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-slate-100 mt-2 tracking-tight">

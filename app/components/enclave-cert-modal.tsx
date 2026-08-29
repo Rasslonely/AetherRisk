@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShieldCheck,
@@ -22,7 +23,23 @@ interface EnclaveCertModalProps {
 
 export function EnclaveCertModal({ isOpen, onClose }: EnclaveCertModalProps) {
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const metadata = getEnclaveMetadata();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   const certificateJson = {
     schema: 'https://phala.network/schemas/dstack-attestation-v1.json',
@@ -36,7 +53,7 @@ export function EnclaveCertModal({ isOpen, onClose }: EnclaveCertModalProps) {
       network: 'Creditcoin CC3 Testnet',
       chainId: 102031,
       contractName: 'CreditRegistry',
-      address: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+      address: '0x592380E737758285C809F92e8De176C7ECBC1015',
     },
     eip712Domain: {
       name: 'AetherRisk CreditRegistry',
@@ -53,137 +70,143 @@ export function EnclaveCertModal({ isOpen, onClose }: EnclaveCertModalProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
-    <div data-testid="enclave-cert-modal" className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
+  return createPortal(
+    <AnimatePresence>
       <div
-        onClick={onClose}
-        className="absolute inset-0 bg-black/85 backdrop-blur-2xl cursor-pointer"
-      />
-
-      {/* Modal Content */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-        className="relative w-full max-w-2xl rounded-3xl border border-slate-800 bg-slate-950 p-6 md:p-8 backdrop-blur-2xl shadow-2xl overflow-hidden z-10"
+        data-testid="enclave-cert-modal"
+        className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-2xl overflow-y-auto"
       >
-            {/* Doppelrand Inset Highlight */}
-            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
+        {/* Clickable Backdrop */}
+        <div className="fixed inset-0 cursor-pointer" onClick={onClose} />
 
-            {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-400">
-                  <ShieldCheck className="h-6 w-6 text-emerald-400" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold text-slate-100 flex items-center gap-2">
-                    TEE Hardware Remote Attestation
-                    <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                      AMD SEV-SNP
-                    </span>
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    Phala dstack Confidential Compute & EIP-712 Trust Boundary
-                  </p>
-                </div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 15 }}
+          transition={{ duration: 0.2 }}
+          className="relative w-full max-w-2xl my-auto max-h-[85vh] overflow-y-auto rounded-3xl border border-slate-800 bg-slate-900/98 p-6 md:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.85)] space-y-6 z-10"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                <ShieldCheck className="h-5 w-5" />
               </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2">
+                  AMD SEV-SNP Remote Attestation
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                    Active TEE
+                  </span>
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Hardware-attested cryptographic quote verified via Phala Network dStack.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
 
+          {/* Details Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+            <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1">
+              <span className="text-slate-500 block text-[10px] uppercase tracking-wider font-semibold">
+                Platform Architecture
+              </span>
+              <span className="text-cyan-300 font-semibold">{metadata.platform}</span>
+            </div>
+
+            <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1">
+              <span className="text-slate-500 block text-[10px] uppercase tracking-wider font-semibold">
+                Hardware Enclave
+              </span>
+              <span className="text-emerald-400 font-semibold">{metadata.hardwareEnclave}</span>
+            </div>
+
+            <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1">
+              <span className="text-slate-500 block text-[10px] uppercase tracking-wider font-semibold">
+                Authorized Enclave Signer (EIP-712)
+              </span>
+              <span className="text-slate-200 truncate block">{metadata.signerAddress}</span>
+            </div>
+
+            <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1">
+              <span className="text-slate-500 block text-[10px] uppercase tracking-wider font-semibold">
+                TCB Status & SVN
+              </span>
+              <span className="text-emerald-400 font-semibold">
+                {metadata.tcbStatus} (SVN {metadata.securityVersion})
+              </span>
+            </div>
+          </div>
+
+          {/* Measurement Hash */}
+          <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-1.5">
+            <span className="text-slate-500 block text-[10px] font-mono uppercase tracking-wider font-semibold">
+              Enclave Measurement Hash (Launch Digest)
+            </span>
+            <div className="text-[11px] font-mono text-cyan-300 break-all bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+              {metadata.measurementHash}
+            </div>
+          </div>
+
+          {/* JSON Certificate Dump */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                <FileCode2 className="h-3.5 w-3.5 text-cyan-400" />
+                Raw Attestation Report
+              </span>
               <button
-                onClick={onClose}
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+                onClick={handleCopy}
+                className="flex items-center gap-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
               >
-                <X className="h-4 w-4" />
+                {copied ? (
+                  <>
+                    <Check className="h-3 w-3 text-emerald-400" />
+                    <span className="text-emerald-400">Copied JSON</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3 w-3" />
+                    <span>Copy JSON</span>
+                  </>
+                )}
               </button>
             </div>
+            <pre className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-[10px] font-mono text-slate-300 overflow-x-auto max-h-40 scrollbar-thin">
+              {JSON.stringify(certificateJson, null, 2)}
+            </pre>
+          </div>
 
-            {/* Hardware Attributes Grid */}
-            <div className="grid grid-cols-2 gap-3 mb-5 text-xs">
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-400 text-[11px] block">Hardware Enclave</span>
-                <span className="font-mono text-emerald-400 font-semibold mt-0.5 block">
-                  {metadata.hardwareEnclave} (Phala Node)
-                </span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-400 text-[11px] block">TCB Status</span>
-                <span className="font-mono text-emerald-400 font-semibold mt-0.5 block">
-                  {metadata.tcbStatus} (SVN: {metadata.securityVersion})
-                </span>
-              </div>
-
-              <div className="col-span-2 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-400 text-[11px] block">Enclave Signer Address</span>
-                <span className="font-mono text-slate-200 text-[11px] break-all mt-0.5 block">
-                  {metadata.signerAddress}
-                </span>
-              </div>
-
-              <div className="col-span-2 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-400 text-[11px] block">Measurement Hash (MRENCLAVE)</span>
-                <span className="font-mono text-slate-400 text-[11px] break-all mt-0.5 block">
-                  {metadata.measurementHash}
-                </span>
-              </div>
-            </div>
-
-            {/* Monospace JSON Code Viewer */}
-            <div className="relative rounded-2xl bg-slate-900/90 border border-slate-800 p-4 font-mono text-[11px] text-emerald-400 max-h-56 overflow-y-auto">
-              <div className="absolute right-3 top-3 flex items-center gap-2">
-                <button
-                  onClick={handleCopy}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-slate-300 text-[10px] transition-colors"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="h-3 w-3 text-emerald-400" />
-                      <span>Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-3 w-3 text-slate-400" />
-                      <span>Copy JSON</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              <pre className="text-slate-300">
-                <code>{JSON.stringify(certificateJson, null, 2)}</code>
-              </pre>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="mt-5 pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-500 font-mono text-[11px]">
-                Verified on Creditcoin CC3 (Chain ID: 102031)
-              </span>
-
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://dstack.phala.network"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  <span>Phala dstack</span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-
-                <button
-                  onClick={onClose}
-                  className="px-4 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          {/* Footer Note */}
+          <div className="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800 pt-4">
+            <a
+              href="https://phala.com/dstack"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:text-cyan-400 transition-colors font-mono"
+            >
+              <span>Phala Network dStack Specs</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+            <button
+              onClick={onClose}
+              className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>,
+    document.body
   );
 }
