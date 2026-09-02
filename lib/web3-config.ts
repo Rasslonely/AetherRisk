@@ -66,31 +66,35 @@ export const ERC20_ABI = [
   'function mint(address to, uint256 amount) external',
 ];
 
-// Minimal AetherVault4626 ABI
+// Complete AetherVault4626 ABI
 export const AETHER_VAULT_ABI = [
+  'function name() view returns (string)',
+  'function symbol() view returns (string)',
+  'function decimals() view returns (uint8)',
   'function asset() view returns (address)',
   'function totalAssets() view returns (uint256)',
   'function totalSupply() view returns (uint256)',
+  'function totalBorrowed() view returns (uint256)',
+  'function balanceOf(address account) view returns (uint256)',
+  'function allowance(address owner, address spender) view returns (uint256)',
   'function convertToShares(uint256 assets) view returns (uint256)',
   'function convertToAssets(uint256 shares) view returns (uint256)',
-  'function maxDeposit(address receiver) view returns (uint256)',
-  'function maxWithdraw(address owner) view returns (uint256)',
+  'function previewDeposit(uint256 assets) view returns (uint256)',
+  'function previewWithdraw(uint256 assets) view returns (uint256)',
   'function deposit(uint256 assets, address receiver) returns (uint256)',
-  'function withdraw(uint256 assets, address receiver, address owner) returns (uint256)',
+  'function withdraw(uint256 assets, address receiver, address vaultOwner) returns (uint256)',
   'function borrow(uint256 amount) returns (bool)',
   'function repay(uint256 amount) returns (bool)',
-  'function borrowedAmount(address borrower) view returns (uint256)',
-  'function currentApyBps() view returns (uint256)',
-  'function getBorrowerApy(address borrower) view returns (uint256)',
+  'function getDynamicApy(address borrower) view returns (uint16)',
+  'function loans(address borrower) view returns (uint256 principal, uint256 interestAccrued, uint16 apyBps, uint256 lastAccrual)',
 ];
 
-// Minimal CreditRegistry ABI
+// Complete CreditRegistry ABI
 export const CREDIT_REGISTRY_ABI = [
-  'function getCreditScore(address borrower) view returns (uint256)',
-  'function getMaxCreditLine(address borrower) view returns (uint256)',
+  'function getScore(address borrower) view returns (uint16 score, uint256 maxCreditLine, uint16 apyBps)',
+  'function getCreditProfile(address borrower) view returns (uint16 score, uint256 maxCreditLine, uint16 apyBps, uint256 lastUpdated, bytes32 lastProofHash)',
   'function authorizedEnclaveSigners(address signer) view returns (bool)',
-  'function hardwareQuoteId() view returns (bytes32)',
-  'function lastAttestationTimestamp(address borrower) view returns (uint256)',
+  'function enclaveNonces(address signer) view returns (uint256)',
 ];
 
 // ==========================================

@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const {
       borrowerName = 'Apex Commodities Corp',
       borrowerAddress = '0x3aF8120bA8812cE789A1201882190018910b910B',

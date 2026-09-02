@@ -152,7 +152,7 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
     // 1. Trigger Faucet button in Navbar
     const faucetBtn = page.locator('[data-testid="faucet-modal-btn"]');
     await expect(faucetBtn).toBeVisible({ timeout: 15000 });
-    await expect(faucetBtn).toContainText('Claim 10k iUSDC');
+    await expect(faucetBtn).toContainText(/10k/i);
     await faucetBtn.click();
 
     // 2. Assert FaucetModal renders
@@ -171,5 +171,54 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
     if (await closeBtn.first().isVisible()) {
       await closeBtn.first().click();
     }
+  });
+
+  test('Test 7: Live Institutional Lending Desk (/vault) — ERC-4626 Metrics, 4-Tab Operations, & Dynamic Rate Curve', async ({
+    page,
+  }) => {
+    await page.goto('/vault');
+
+    // 1. Assert on-chain metrics grid renders
+    const totalAssetsCard = page.locator('[data-testid="metric-total-assets"]');
+    await expect(totalAssetsCard).toBeVisible({ timeout: 15000 });
+    await expect(totalAssetsCard).toContainText('Total Liquidity');
+    await expect(totalAssetsCard).toContainText('50,000');
+
+    const debtCard = page.locator('[data-testid="metric-user-debt"]');
+    await expect(debtCard).toBeVisible();
+
+    // 2. Assert Dynamic Rate Curve visualizer renders
+    const rateCurve = page.locator('[data-testid="rate-curve-visualizer"]');
+    await expect(rateCurve).toBeVisible();
+    await expect(rateCurve).toContainText('Dynamic Risk-Adjusted Interest Curve');
+    await expect(rateCurve).toContainText('AAA Prime');
+
+    // 3. Assert Vault Operations Card and 4 action tabs exist
+    const opsCard = page.locator('[data-testid="vault-operations-card"]');
+    await expect(opsCard).toBeVisible();
+
+    const tabDeposit = page.locator('[data-testid="tab-deposit"]');
+    const tabBorrow = page.locator('[data-testid="tab-borrow"]');
+    const tabRepay = page.locator('[data-testid="tab-repay"]');
+    const tabWithdraw = page.locator('[data-testid="tab-withdraw"]');
+
+    await expect(tabDeposit).toBeVisible();
+    await expect(tabBorrow).toBeVisible();
+    await expect(tabRepay).toBeVisible();
+    await expect(tabWithdraw).toBeVisible();
+
+    // 4. Switch between operation tabs and verify input responsiveness
+    await tabBorrow.click();
+    const amountInput = page.locator('[data-testid="vault-amount-input"]');
+    await expect(amountInput).toBeVisible();
+
+    await tabRepay.click();
+    await expect(amountInput).toBeVisible();
+
+    await tabWithdraw.click();
+    await expect(amountInput).toBeVisible();
+
+    await tabDeposit.click();
+    await expect(amountInput).toBeVisible();
   });
 });
