@@ -1,13 +1,22 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import './globals.css';
 import { Navbar } from './components/navbar';
 import { Web3Provider } from './components/web3-provider';
 import { Shield, ExternalLink, Cpu, Layers, Lock, Zap } from 'lucide-react';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://aetherrisk.xyz'),
   title: 'AetherRisk | Autonomous TEE-Guarded Cross-Chain Credit & Liquidation Underwriter',
   description:
     'Eliminating cross-chain oracle sync latency and false liquidations by verifying source-chain transactions synchronously in Creditcoin precompile bytecode within 15 seconds.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/atherisk_logo_icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/atherisk_logo_icon.png', sizes: '180x180' }],
+  },
   keywords: [
     'Creditcoin CC3',
     'Substrate Precompiles',
@@ -26,6 +35,14 @@ export const metadata: Metadata = {
       'Synchronous bytecode verification of Ethereum L1 facts on Creditcoin CC3 within 15s without oracle sync latency.',
     url: 'https://aetherrisk.xyz',
     siteName: 'AetherRisk',
+    images: [
+      {
+        url: '/atherisk_logo_full.png',
+        width: 810,
+        height: 800,
+        alt: 'AtherRisk Logo',
+      },
+    ],
     type: 'website',
   },
   twitter: {
@@ -33,6 +50,7 @@ export const metadata: Metadata = {
     title: 'AetherRisk — Synchronous Cross-Chain Credit Risk Engine',
     description:
       'Creditcoin CC3 EVM Frontier native Attestcoin Smart Contract orchestrator and TEE confidential risk underwriting engine.',
+    images: ['/atherisk_logo_full.png'],
   },
 };
 
@@ -66,8 +84,14 @@ export default function RootLayout({
         <footer className="relative z-10 w-full border-t border-slate-800/80 bg-slate-950/90 py-10 mt-24 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-cyan-600 to-emerald-500 text-slate-950">
-                <Shield className="h-4 w-4 fill-slate-950" />
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 shadow-[0_0_15px_rgba(6,182,212,0.25)] p-1 overflow-hidden">
+                <Image
+                  src="/atherisk_logo_icon.png"
+                  alt="AtherRisk Logo"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <span className="font-bold text-sm text-slate-200">

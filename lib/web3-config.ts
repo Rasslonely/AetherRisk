@@ -136,3 +136,35 @@ export function formatTokenBalance(amount: bigint | string | number, decimals = 
     return '0.0000';
   }
 }
+
+/**
+ * Prompt user's Web3 wallet (MetaMask, Rabby, etc.) to track an ERC-20 token via EIP-747.
+ */
+export async function addTokenToWallet(
+  tokenAddress: string,
+  tokenSymbol: string,
+  tokenDecimals: number = 18
+): Promise<boolean> {
+  try {
+    const provider = typeof window !== 'undefined' ? (window as any).ethereum : null;
+    if (!provider) {
+      console.warn('No Web3 provider found to add token');
+      return false;
+    }
+    const wasAdded = await provider.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address: tokenAddress,
+          symbol: tokenSymbol,
+          decimals: tokenDecimals,
+        },
+      },
+    });
+    return !!wasAdded;
+  } catch (err: any) {
+    console.warn('Failed to add token to wallet via wallet_watchAsset:', err?.message || err);
+    return false;
+  }
+}

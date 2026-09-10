@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   Shield,
@@ -19,13 +20,14 @@ import {
   Building2,
   Clock,
   Code2,
+  Terminal,
+  Landmark,
+  Coins,
 } from 'lucide-react';
-import { InteractiveSandbox } from './components/interactive-sandbox';
 import { RiskMetricRadar } from './components/risk-metric-radar';
 import { TelemetryTable } from './components/telemetry-table';
 
 export default function HomePage() {
-
   const kpiStats = [
     {
       label: 'Total Volume Proven',
@@ -96,28 +98,29 @@ export default function HomePage() {
           Eliminating 15-minute cross-chain oracle sync latency and false liquidations by verifying source-chain transactions synchronously in Creditcoin CC3 precompile bytecode within 15 seconds.
         </motion.p>
 
-        {/* Action CTAs */}
+        {/* Primary Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
           className="flex flex-wrap items-center justify-center gap-4 pt-2"
         >
-          <a
-            href="#sandbox-section"
-            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:scale-105 active:scale-95 transition-all"
+          <Link
+            href="/sandbox"
+            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(168,85,247,0.35)] hover:scale-105 active:scale-95 transition-all"
           >
-            <Zap className="h-4 w-4 fill-slate-950" />
-            <span>Launch Risk Sandbox</span>
+            <Terminal className="h-4 w-4 fill-slate-950 text-slate-950" />
+            <span>Fast-Track Sandbox</span>
             <ArrowRight className="h-4 w-4 ml-1" />
-          </a>
+          </Link>
 
           <Link
-            href="/operations"
-            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-slate-300 hover:text-slate-100 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 backdrop-blur-md transition-all hover:scale-105"
+            href="/vault"
+            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 hover:border-emerald-500/60 backdrop-blur-md transition-all hover:scale-105"
           >
-            <Layers className="h-4 w-4 text-cyan-400" />
-            <span>Explore Verified Operations</span>
+            <Zap className="h-4 w-4 text-emerald-400" />
+            <span>Live Web3 dApp</span>
+            <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
         </motion.div>
       </section>
@@ -134,21 +137,19 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.1 * idx }}
               className="relative rounded-2xl border border-slate-800 bg-slate-950/70 p-5 backdrop-blur-xl shadow-lg hover:border-slate-700 transition-colors group"
             >
-              {/* Double Bezel Inset Highlight */}
               <div className="absolute inset-0 rounded-2xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
               <div className="flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium">{stat.label}</span>
                 <div
-                  className={`flex h-8 w-8 items-center justify-center rounded-lg ${
-                    stat.accent === 'cyan'
+                  className={`flex h-8 w-8 items-center justify-center rounded-lg ${stat.accent === 'cyan'
                       ? 'bg-cyan-950/80 text-cyan-400 border border-cyan-500/30'
                       : stat.accent === 'emerald'
-                      ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/30'
-                      : stat.accent === 'purple'
-                      ? 'bg-purple-950/80 text-purple-400 border border-purple-500/30'
-                      : 'bg-amber-950/80 text-amber-400 border border-amber-500/30'
-                  }`}
+                        ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/30'
+                        : stat.accent === 'purple'
+                          ? 'bg-purple-950/80 text-purple-400 border border-purple-500/30'
+                          : 'bg-amber-950/80 text-amber-400 border border-amber-500/30'
+                    }`}
                 >
                   <Icon className="h-4 w-4" />
                 </div>
@@ -168,14 +169,134 @@ export default function HomePage() {
         })}
       </section>
 
-      {/* 3. FLAGSHIP INTERACTIVE SANDBOX */}
-      <section id="sandbox-section" className="space-y-4">
-        <InteractiveSandbox />
+      {/* 3. TWO INSTITUTIONAL GATEWAY PORTALS (SOLVES PAGE DUPLICATION) */}
+      <section className="space-y-4">
+        <div className="border-b border-slate-800/80 pb-4 flex items-center justify-between">
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+              Ecosystem Navigation
+            </span>
+            <h2 className="text-2xl font-bold text-slate-100 tracking-tight mt-1">
+              Select Your Execution Mode
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Gateway 1: Fast-Track Sandbox */}
+          <div className="relative rounded-3xl border border-purple-500/30 bg-slate-950/80 p-6 md:p-8 backdrop-blur-xl shadow-2xl flex flex-col justify-between group hover:border-purple-500/60 transition-all">
+            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                  <Terminal className="h-3 w-3" />
+                  30s Zero-Wallet Lab
+                </span>
+                <span className="text-[11px] font-mono text-slate-400 bg-purple-950/60 border border-purple-500/30 px-2 py-0.5 rounded-full">
+                  No Gas Needed
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-slate-100 group-hover:text-purple-300 transition-colors">
+                  Fast-Track Risk Sandbox
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
+                  Evaluate the entire cross-chain underwriting lifecycle in 30 seconds. Trigger Sepolia loan repayments, witness synchronous Substrate precompile 0xFD2 verification, and inspect autonomous Gemini AI underwriting memos without needing a testnet wallet.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Speed</span>
+                  <span className="text-xs font-semibold text-purple-300 font-mono">12.4s Verification</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">AI Copilot</span>
+                  <span className="text-xs font-semibold text-cyan-300 font-mono">Google Gemini Flash</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Score Re-rate</span>
+                  <span className="text-xs font-semibold text-emerald-300 font-mono">620 → 810 Prime</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Prerequisite</span>
+                  <span className="text-xs font-semibold text-slate-300 font-mono">Zero Setup</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6">
+              <Link
+                href="/sandbox"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>Launch Sandbox Simulator</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Gateway 2: Live Web3 dApp */}
+          <div className="relative rounded-3xl border border-emerald-500/30 bg-slate-950/80 p-6 md:p-8 backdrop-blur-xl shadow-2xl flex flex-col justify-between group hover:border-emerald-500/60 transition-all">
+            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <Zap className="h-3 w-3" />
+                  Live Smart Contracts
+                </span>
+                <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                  CC3 Testnet (102031)
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-slate-100 group-hover:text-emerald-300 transition-colors">
+                  Live Web3 Lending Desk & Passport
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
+                  Interact with real deployed smart contracts on Creditcoin CC3. Claim 10,000 iUSDC from the faucet, inspect on-chain borrower reputations and AMD SEV-SNP hardware TEE attestations in CreditRegistry.sol, and borrow or deposit against $50,000 seed liquidity.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Seed Liquidity</span>
+                  <span className="text-xs font-semibold text-emerald-300 font-mono">$50,000.00 iUSDC</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Hardware TEE</span>
+                  <span className="text-xs font-semibold text-cyan-300 font-mono">AMD SEV-SNP Quote</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Vault Model</span>
+                  <span className="text-xs font-semibold text-emerald-300 font-mono">ERC-4626 avUSD</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                  <span className="text-[10px] text-slate-400 font-mono block">Faucet Capital</span>
+                  <span className="text-xs font-semibold text-cyan-300 font-mono">1-Click 10k iUSDC</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6">
+              <Link
+                href="/vault"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>Enter Institutional Lending Desk</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 4. DUAL-ENGINE ARCHITECTURAL OVERVIEW */}
       <section className="relative rounded-3xl border border-slate-800 bg-slate-950/80 p-6 md:p-8 backdrop-blur-xl shadow-2xl overflow-hidden">
-        {/* Double Bezel Highlight */}
         <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
         <div className="border-b border-slate-800/80 pb-6 mb-8">
@@ -226,7 +347,7 @@ export default function HomePage() {
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100 font-mono">EvmV1Decoder</strong>: Extracts execution receipt status (`0x1`) with strict replay protection mapping.
+                  <strong className="text-slate-100 font-mono">EvmV1Decoder</strong>: Extracts execution receipt status (<code className="text-cyan-300">0x1</code>) with strict replay protection mapping.
                 </span>
               </li>
               <li className="flex items-start gap-2">
@@ -310,7 +431,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. REMNARA-STYLE BOTTOM VERIFIED CONTRACTS DRAWER TRIGGER BANNER */}
+      {/* 6. VERIFIED CONTRACTS DRAWER TRIGGER BANNER */}
       <section className="relative rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-6 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3 text-left">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shrink-0">

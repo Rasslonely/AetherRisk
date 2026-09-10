@@ -43,6 +43,9 @@ export interface UserVaultPosition {
   availableCreditFormatted: string;
   borrowApyBps: number;
   borrowApyPercent: string;
+  isAttested: boolean;
+  lastUpdated: number;
+  lastProofHash: string;
 }
 
 /**
@@ -122,14 +125,14 @@ export async function fetchVaultOverview(
       rawUsdcBalance,
       rawAllowance,
       loanData,
-      scoreData,
+      profileData,
       dynamicApyBps,
     ] = await Promise.all([
       vaultContract.balanceOf(checksummed).catch(() => 0n),
       usdcContract.balanceOf(checksummed).catch(() => 0n),
       usdcContract.allowance(checksummed, CONTRACT_ADDRESSES.CC3.AETHER_VAULT_4626).catch(() => 0n),
       vaultContract.loans(checksummed).catch(() => [0n, 0n, 0, 0n]),
-      registryContract.getScore(checksummed).catch(() => [620, 1000000n * 10n ** 18n, 920]),
+      registryContract.getCreditProfile(checksummed).catch(() => [0, 0n, 0, 0n, '0x0']),
       vaultContract.getDynamicApy(checksummed).catch(() => 650),
     ]);
 
@@ -151,12 +154,28 @@ export async function fetchVaultOverview(
     const interestAccrued = BigInt(loanData?.[1] || 0);
     const totalDebtDue = principal + interestAccrued;
 
-    const creditScore = Number(scoreData?.[0]) || 620;
-    const maxCreditLine = BigInt(scoreData?.[1] || 1000000n * 10n ** 18n);
-    const availableCredit: bigint =
-      maxCreditLine >= principal ? maxCreditLine - principal : 0n;
+    const rawLastUpdated = BigInt(profileData?.[3] || 0n);
+    const isAttested = rawLastUpdated > 0n;
+    const lastUpdated = Number(rawLastUpdated);
+    const lastProofHash = String(profileData?.[4] || '0x0');
 
-    const apyBps = Number(dynamicApyBps) || 650;
+    let creditScore = 0;
+    let maxCreditLine = 0n;
+    let availableCredit = 0n;
+    let apyBps = 650;
+
+    if (isAttested) {
+      creditScore = Number(profileData?.[0]) || 620;
+      maxCreditLine = BigInt(profileData?.[1] || 0n);
+      availableCredit = maxCreditLine >= principal ? maxCreditLine - principal : 0n;
+      apyBps = Number(profileData?.[2]) || Number(dynamicApyBps) || 650;
+    } else {
+      creditScore = 0;
+      maxCreditLine = 0n;
+      availableCredit = 0n;
+      apyBps = Number(dynamicApyBps) || 650;
+    }
+
     const borrowApyPercent = (apyBps / 100).toFixed(2);
 
     user = {
@@ -181,6 +200,9 @@ export async function fetchVaultOverview(
       availableCreditFormatted: formatTokenBalance(availableCredit, 18, 2),
       borrowApyBps: apyBps,
       borrowApyPercent,
+      isAttested,
+      lastUpdated,
+      lastProofHash,
     };
   }
 

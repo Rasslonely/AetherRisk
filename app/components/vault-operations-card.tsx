@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { ethers } from 'ethers';
 import { useWeb3 } from './web3-provider';
 import {
@@ -25,6 +26,7 @@ import {
   Wallet,
   Sparkles,
   Info,
+  ShieldAlert,
 } from 'lucide-react';
 
 interface VaultOperationsCardProps {
@@ -47,6 +49,38 @@ export function VaultOperationsCard({
   const [txStep, setTxStep] = useState<string | null>(null);
   const [lastTxHash, setLastTxHash] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isAttesting, setIsAttesting] = useState<boolean>(false);
+
+  const handleInstantAttestation = async () => {
+    if (!account) {
+      setErrorMessage('Please connect your Web3 wallet first.');
+      return;
+    }
+    setIsAttesting(true);
+    setErrorMessage(null);
+    try {
+      const res = await fetch('/api/attest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          borrowerAddress: account,
+          score: 780,
+          maxCreditLine: 500000,
+          apyBps: 480,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        await onOperationSuccess();
+      } else {
+        setErrorMessage(data.error || 'Failed to complete TEE attestation.');
+      }
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Failed to complete TEE attestation.');
+    } finally {
+      setIsAttesting(false);
+    }
+  };
 
   // Quick Max helpers
   const handleSetMax = () => {
@@ -289,6 +323,47 @@ export function VaultOperationsCard({
         )}
       </div>
 
+      {/* Unverified Borrower Notice */}
+      {activeTab === 'borrow' && user && !user.isAttested && (
+        <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs space-y-2">
+          <div className="flex items-center gap-2 font-semibold">
+            <ShieldAlert className="h-4 w-4 text-amber-400 shrink-0" />
+            <span>Underwriting Required (Credit Limit: $0.00)</span>
+          </div>
+          <p className="text-[11px] text-slate-300 leading-relaxed font-sans">
+            Uncollateralized credit lines require an active hardware TEE attestation from CreditRegistry on Creditcoin CC3. Test borrower underwriting in the Risk Sandbox or inspect your Credit Passport.
+          </p>
+          <div className="pt-1 flex items-center gap-4 font-mono text-[11px]">
+            <Link href="/sandbox" className="text-cyan-400 hover:text-cyan-300 underline flex items-center gap-1">
+              <span>Risk Sandbox</span>
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+            <Link href="/passport" className="text-emerald-400 hover:text-emerald-300 underline flex items-center gap-1">
+              <span>Credit Passport</span>
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          </div>
+
+          <button
+            onClick={handleInstantAttestation}
+            disabled={isAttesting}
+            className="w-full mt-2 py-2.5 px-4 rounded-xl text-xs font-mono font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+            {isAttesting ? (
+              <>
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                <span>Broadcasting Attestation to CC3...</span>
+              </>
+            ) : (
+              <>
+                <Sparkles className="h-3.5 w-3.5 fill-slate-950" />
+                <span>⚡ Request Instant TEE Attestation (780 Score / $500k Limit)</span>
+              </>
+            )}
+          </button>
+        </div>
+      )}
+
       {/* Error Notice */}
       {errorMessage && (
         <div className="p-3.5 rounded-xl bg-red-950/60 border border-red-500/30 text-red-300 text-xs flex items-center gap-2.5">
@@ -348,7 +423,7 @@ export function VaultOperationsCard({
         <button
           data-testid="vault-execute-btn"
           onClick={handleExecute}
-          disabled={isProcessing}
+          disabled={isProcessing || (activeTab === 'borrow' && (!user || !user.isAttested || user.availableCredit === 0n))}
           className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isProcessing ? (
@@ -361,7 +436,7 @@ export function VaultOperationsCard({
               <Sparkles className="h-4 w-4 fill-slate-950" />
               <span>
                 {activeTab === 'deposit' && 'Execute Deposit & Mint Shares'}
-                {activeTab === 'borrow' && 'Execute Uncollateralized Borrow'}
+                {activeTab === 'borrow' && (user && !user.isAttested ? 'Underwriting Required to Borrow' : 'Execute Uncollateralized Borrow')}
                 {activeTab === 'repay' && 'Execute Debt Repayment'}
                 {activeTab === 'withdraw' && 'Execute Share Redemption'}
               </span>

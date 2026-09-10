@@ -68,21 +68,27 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
   }) => {
     await page.goto('/');
 
-    // 1. Trigger TEE Attestation button in Navbar
+    // 1. Open Live Web3 dApp dropdown to reveal TEE proof trigger
+    const web3Trigger = page.locator('[data-testid="mode-switcher"] button:has-text("Live Web3")');
+    if (await web3Trigger.isVisible()) {
+      await web3Trigger.click();
+    }
+
+    // 2. Trigger TEE Attestation button
     const teeBtn = page.locator('[data-testid="tee-cert-btn"]');
     await expect(teeBtn).toBeVisible({ timeout: 15000 });
     await teeBtn.click();
 
-    // 2. Assert Modal Dialog appears
+    // 3. Assert Modal Dialog appears
     const modal = page.locator('[data-testid="enclave-cert-modal"]');
     await expect(modal).toBeVisible({ timeout: 10000 });
 
-    // 3. Assert Hardware Quote measurement hash and TEE signer are present
+    // 4. Assert Hardware Quote measurement hash and TEE signer are present
     await expect(modal).toContainText('AMD SEV-SNP');
     await expect(modal).toContainText('0x8891');
     await expect(modal).toContainText('0x90F7');
 
-    // 4. Close modal
+    // 5. Close modal
     const closeBtn = modal.locator('button:has-text("Close")');
     if (await closeBtn.isVisible()) {
       await closeBtn.click();
@@ -94,16 +100,22 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
   }) => {
     await page.goto('/');
 
-    // 1. Trigger Verified Contracts button in Navbar
-    const contractsBtn = page.locator('[data-testid="verified-contracts-btn"]');
+    // 1. Open Live Web3 dApp dropdown to reveal Contracts trigger
+    const web3Trigger = page.locator('[data-testid="mode-switcher"] button:has-text("Live Web3")');
+    if (await web3Trigger.isVisible()) {
+      await web3Trigger.click();
+    }
+
+    // 2. Trigger Verified Contracts button
+    const contractsBtn = page.locator('[data-testid="verified-contracts-btn"]').first();
     await expect(contractsBtn).toBeVisible({ timeout: 15000 });
     await contractsBtn.click();
 
-    // 2. Assert Modal Dialog appears
+    // 3. Assert Modal Dialog appears
     const modal = page.locator('[data-testid="verified-contracts-modal"]');
     await expect(modal).toBeVisible({ timeout: 10000 });
 
-    // 3. Assert all deployed contract addresses exist
+    // 4. Assert all deployed contract addresses exist
     await expect(modal).toContainText('CreditRegistry.sol');
     await expect(modal).toContainText('AetherRiskASC.sol');
     await expect(modal).toContainText('AetherVault4626.sol');
@@ -111,7 +123,7 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
     await expect(modal).toContainText('SepoliaLendingEmitter.sol');
     await expect(modal).toContainText('0x592380E737758285C809F92e8De176C7ECBC1015');
 
-    // 4. Close modal
+    // 5. Close modal
     const closeBtn = modal.locator('button:has-text("Close")');
     if (await closeBtn.isVisible()) {
       await closeBtn.click();
@@ -220,5 +232,74 @@ test.describe('AetherRisk Grand-Prize E2E Judge Flow Suite', () => {
 
     await tabDeposit.click();
     await expect(amountInput).toBeVisible();
+
+    // 5. Assert In-Page Telemetry Modal opens without leaving /vault
+    const viewProofsBtn = page.locator('button:has-text("View All 18 Proofs")');
+    await expect(viewProofsBtn).toBeVisible();
+    await viewProofsBtn.click();
+
+    const telemetryModal = page.locator('[data-testid="telemetry-modal"]');
+    await expect(telemetryModal).toBeVisible({ timeout: 10000 });
+    await expect(telemetryModal).toContainText('Verified Cross-Chain Solvency Ledger');
+    await expect(telemetryModal).toContainText('0xFD2');
+    expect(page.url()).toContain('/vault');
+
+    // Close modal via close button
+    const closeBtn = telemetryModal.locator('button[aria-label="Close modal"]').or(telemetryModal.locator('button:has-text("Close Viewer")'));
+    await closeBtn.first().click();
+    await expect(telemetryModal).not.toBeVisible();
+  });
+
+  test('Test 8: Live On-Chain Credit Passport (/passport) — CreditRegistry Inspector & Hardware TEE Attestation', async ({
+    page,
+  }) => {
+    await page.goto('/passport');
+
+    // 1. Assert Passport Hero & Contract Links
+    await expect(page.locator('h1')).toContainText('Credit Passport');
+
+    // 2. Assert Credit Passport Card
+    const passportCard = page.locator('[data-testid="credit-passport-card"]');
+    await expect(passportCard).toBeVisible({ timeout: 15000 });
+
+    // 3. Assert Hardware TEE boundary
+    await expect(passportCard).toContainText('Hardware TEE Enclave Proof Boundary');
+    await expect(passportCard).toContainText('CreditRegistry Contract');
+
+    // 4. Test quick lookup pills
+    const quickPill = page.locator('button:has-text("SolarGrid Africa")').first();
+    if (await quickPill.isVisible()) {
+      await quickPill.click();
+      await expect(passportCard).toBeVisible();
+    }
+  });
+
+  test('Test 9: Remnara Institutional Compliance Modal & Dual-Mode Navigation Switcher', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    // 1. Assert Mode Switcher in Navbar
+    const modeSwitcher = page.locator('[data-testid="mode-switcher"]');
+    await expect(modeSwitcher).toBeVisible({ timeout: 15000 });
+    await expect(modeSwitcher).toContainText(/Live/i);
+    await expect(modeSwitcher).toContainText(/Sandbox/i);
+
+    // 2. Open Terms Modal via Navbar
+    const termsBtn = page.locator('[data-testid="terms-modal-btn"]');
+    await expect(termsBtn).toBeVisible({ timeout: 15000 });
+    await termsBtn.click();
+
+    const termsModal = page.locator('[data-testid="terms-modal"]');
+    await expect(termsModal).toBeVisible({ timeout: 15000 });
+    await expect(termsModal).toContainText('Terms of Use');
+    await expect(termsModal).toContainText('Non-Custodial');
+    await expect(termsModal).toContainText('Precompile 0xFD2');
+
+    // Click Accept button
+    const acceptBtn = page.locator('[data-testid="accept-terms-btn"]');
+    await expect(acceptBtn).toBeVisible({ timeout: 10000 });
+    await acceptBtn.click();
+    await expect(termsModal).not.toBeVisible({ timeout: 10000 });
   });
 });

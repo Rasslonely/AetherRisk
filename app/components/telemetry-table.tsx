@@ -105,9 +105,9 @@ export function TelemetryTable({
   ];
 
   const proofSources: { label: string; value: string }[] = [
-    { label: 'All Sources', value: 'ALL' },
-    { label: 'Live Prover', value: 'LIVE_ATTESTCOIN' },
-    { label: 'Attested Dataset', value: 'CACHED_REAL_PROOF' },
+    { label: 'All Operations', value: 'ALL' },
+    { label: '⚡ Live CC3 Activity', value: 'LIVE_ATTESTCOIN' },
+    { label: 'Attested Benchmark Ledger', value: 'CACHED_REAL_PROOF' },
   ];
 
   return (
@@ -235,13 +235,14 @@ export function TelemetryTable({
                   {/* Tx Code & Time */}
                   <td className="px-4 py-3.5 font-mono whitespace-nowrap">
                     <span className="font-semibold text-cyan-400">{op.txCode}</span>
-                    <span className="text-[10px] text-slate-500 block">
+                    <span className="text-[10px] text-slate-500 block" suppressHydrationWarning>
                       {new Date(op.timestamp).toLocaleString('en-US', {
                         month: 'short',
                         day: 'numeric',
                         hour: '2-digit',
                         minute: '2-digit',
-                      })}
+                        timeZone: 'UTC',
+                      })} UTC
                     </span>
                   </td>
 
@@ -306,7 +307,7 @@ export function TelemetryTable({
                         }`}
                       />
                       <span className={isLive ? 'text-emerald-400 font-semibold' : 'text-slate-300'}>
-                        {isLive ? 'LIVE ATTESTCOIN' : 'CACHED REAL'}
+                        {isLive ? 'LIVE CC3 ON-CHAIN' : 'BENCHMARK ATTESTED'}
                       </span>
                     </div>
                     <span className="text-[10px] text-slate-500 block mt-0.5">

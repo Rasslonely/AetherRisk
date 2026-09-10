@@ -10,14 +10,14 @@
   - **TARGET**: Build `FaucetModal` and contract helper for `MockInstitutionalUSDC.sol` (`0xb906ae7ec832814922FCEEd270e0A7A1A2657397`), enabling 1-click 10,000 iUSDC minting with live explorer toast notifications.
   - **FILES**: `app/api/faucet/route.ts`, `app/components/faucet-modal.tsx`, `lib/contracts/mock-usdc.ts`.
 
-- [ ] **Phase 29** → `Live Institutional Lending Desk & AetherVault4626 Portal`
+- [x] **Phase 29** → `Live Institutional Lending Desk & AetherVault4626 Portal`
   - **TARGET**: Create `/vault` page with live smart contract interaction with `AetherVault4626.sol` (`0xD9B3F2C699fCfC219d35F7709245312a621eFd39`): Deposit iUSDC, Borrow Capital, Repay Debt, and Withdraw Liquidity with real-time on-chain position tracking.
   - **FILES**: `app/vault/page.tsx`, `app/components/vault-operations-card.tsx`, `lib/contracts/aether-vault.ts`.
 
-- [ ] **Phase 30** → `Live On-Chain Credit Passport & CreditRegistry Inspector`
+- [x] **Phase 30** → `Live On-Chain Credit Passport & CreditRegistry Inspector`
   - **TARGET**: Build `/passport` page and Borrower Credit Profile widget reading live from `CreditRegistry.sol` (`0x592380E737758285C809F92e8De176C7ECBC1015`), showing on-chain score, tier, and TEE signer verification.
   - **FILES**: `app/passport/page.tsx`, `app/components/credit-passport-card.tsx`, `lib/contracts/credit-registry.ts`.
 
-- [ ] **Phase 31** → `Remnara Institutional Compliance Modal & Dual-Mode Navigation`
+- [x] **Phase 31** → `Remnara Institutional Compliance Modal & Dual-Mode Navigation`
   - **TARGET**: Implement 4-point Institutional Terms of Service modal, Dual-Mode Switcher (`[ ⚡ Live Web3 dApp ]` ⟷ `[ 🔬 Fast-Track Sandbox ]`), and run complete Playwright E2E verification across all live dApp flows.
   - **FILES**: `app/components/terms-modal.tsx`, `app/components/mode-switcher.tsx`, `app/components/navbar.tsx`, `tests/e2e/live-judge-flow.spec.ts`.

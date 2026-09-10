@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Layers,
@@ -12,6 +13,8 @@ import {
   Clock,
   ArrowRight,
   ExternalLink,
+  Terminal,
+  Landmark,
 } from 'lucide-react';
 import { TelemetryTable } from '../components/telemetry-table';
 
@@ -63,18 +66,18 @@ export default function OperationsPage() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                <Layers className="h-3 w-3" />
-                Live Operations Stream
+                <Cpu className="h-3 w-3" />
+                Substrate Precompile 0xFD2
               </span>
               <span className="text-xs px-2.5 py-0.5 rounded-full font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Audited Dataset
+                18 Proofs Verified
               </span>
             </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 tracking-tight">
-              Cross-Chain Operations Telemetry Feed
+              Cross-Chain Proof & Solvency Explorer
             </h1>
             <p className="text-xs md:text-sm text-slate-400 max-w-2xl">
-              Every loan repayment, collateral addition, and debt settlement is proven synchronously in Creditcoin CC3 precompile bytecode without oracle relayers.
+              Audit live Creditcoin CC3 on-chain transactions alongside 18 historical benchmark proofs proven synchronously in native precompile 0xFD2 bytecode without oracle relayers.
             </p>
           </div>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { VaultOverview, UserVaultPosition } from '@/lib/contracts/aether-vault';
 import {
   Landmark,
@@ -9,6 +10,7 @@ import {
   ShieldCheck,
   TrendingUp,
   RefreshCw,
+  ArrowUpRight,
 } from 'lucide-react';
 
 interface VaultMetricsGridProps {
@@ -68,7 +70,10 @@ export function VaultMetricsGrid({
               </div>
             </div>
             <div className="text-[11px] font-mono text-slate-400 mt-2 flex items-center justify-between border-t border-slate-900 pt-2">
-              <span>Pool: iUSDC</span>
+              <span className="flex items-center gap-1">
+                Pool: iUSDC
+                <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-normal">Seed</span>
+              </span>
               <span className="text-cyan-400 font-medium">
                 {(100 - vault.utilizationRate).toFixed(0)}% Avail
               </span>
@@ -147,12 +152,28 @@ export function VaultMetricsGrid({
                 </div>
               </div>
               <div className="text-xl font-bold font-mono text-cyan-300 tracking-tight tabular-nums">
-                ${user ? user.availableCreditFormatted : '1,000,000.00'}
+                ${user?.isAttested ? user.availableCreditFormatted : '0.00'}
               </div>
             </div>
             <div className="text-[11px] font-mono text-slate-400 mt-2 flex items-center justify-between border-t border-slate-900 pt-2">
-              <span>Score: {user ? user.creditScore : 620}</span>
-              <span className="text-emerald-400 font-medium">TEE-Attested</span>
+              {user?.isAttested ? (
+                <>
+                  <span>Score: {user.creditScore}</span>
+                  <span className="text-emerald-400 font-medium">TEE-Attested</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-amber-400/90 text-[10px]">Unverified</span>
+                  <Link
+                    href="/sandbox"
+                    className="text-cyan-400 hover:text-cyan-300 underline text-[10px] flex items-center gap-0.5"
+                    title="Underwrite wallet in Risk Sandbox"
+                  >
+                    <span>Underwrite</span>
+                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -11,7 +11,14 @@ interface ConnectWalletButtonProps {
 }
 
 export function ConnectWalletButton({ className = '' }: ConnectWalletButtonProps) {
-  const { account, isCorrectNetwork, nativeBalance, switchNetwork, isConnecting } = useWeb3();
+  const {
+    account,
+    isCorrectNetwork,
+    nativeBalance,
+    usdcBalance,
+    switchNetwork,
+    isConnecting,
+  } = useWeb3();
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -51,9 +58,23 @@ export function ConnectWalletButton({ className = '' }: ConnectWalletButtonProps
             <span className="font-mono text-xs">{formatAddress(account)}</span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-950 border border-slate-800/80 font-mono text-[10px] text-cyan-300">
-            <span>{nativeBalance}</span>
-            <span className="text-slate-500">tCTC</span>
+          <div className="hidden md:flex items-center gap-1.5 font-mono text-[10px]">
+            <span
+              className="px-2 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-slate-300 flex items-center gap-1"
+              title="Native Gas: tCTC"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <span>{nativeBalance}</span>
+              <span className="text-slate-500">tCTC</span>
+            </span>
+            <span
+              className="px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-semibold flex items-center gap-1 shadow-[0_0_8px_rgba(16,185,129,0.2)]"
+              title="Institutional Asset: iUSDC"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>${usdcBalance}</span>
+              <span className="text-emerald-500/80">iUSDC</span>
+            </span>
           </div>
 
           <ChevronDown className="h-3 w-3 text-slate-400" />

@@ -19,7 +19,12 @@ import {
 } from 'lucide-react';
 import { useWeb3 } from './web3-provider';
 import { requestFaucetFunds, FaucetClaimResult } from '@/lib/contracts/mock-usdc';
-import { CREDITCOIN_CC3_TESTNET, CONTRACT_ADDRESSES } from '@/lib/web3-config';
+import {
+  CREDITCOIN_CC3_TESTNET,
+  CONTRACT_ADDRESSES,
+  formatAddress,
+  addTokenToWallet,
+} from '@/lib/web3-config';
 
 interface FaucetModalProps {
   isOpen: boolean;
@@ -33,6 +38,8 @@ export function FaucetModal({ isOpen, onClose }: FaucetModalProps) {
   const [claimResult, setClaimResult] = useState<FaucetClaimResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copiedHash, setCopiedHash] = useState<boolean>(false);
+  const [copiedContract, setCopiedContract] = useState<boolean>(false);
+  const [tokenImported, setTokenImported] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -199,9 +206,25 @@ export function FaucetModal({ isOpen, onClose }: FaucetModalProps) {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] text-slate-500">Token Contract:</span>
-                  <span className="text-slate-300 truncate max-w-[200px]">
+                  <span className="text-slate-300 truncate max-w-[200px]" title={CONTRACT_ADDRESSES.CC3.MOCK_IUSDC}>
                     {CONTRACT_ADDRESSES.CC3.MOCK_IUSDC}
                   </span>
+                </div>
+                <div className="flex items-center justify-between pt-1 border-t border-slate-800/60">
+                  <span className="text-[11px] text-slate-500">MetaMask Asset:</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      addTokenToWallet(
+                        CONTRACT_ADDRESSES.CC3.MOCK_IUSDC,
+                        'iUSDC',
+                        18
+                      )
+                    }
+                    className="text-[11px] text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1 hover:underline"
+                  >
+                    <span>🦊 Add iUSDC to Wallet</span>
+                  </button>
                 </div>
               </div>
 
@@ -249,6 +272,18 @@ export function FaucetModal({ isOpen, onClose }: FaucetModalProps) {
                   <span className="text-cyan-300 font-bold">10,000.00 iUSDC</span>
                 </div>
 
+                {claimResult.recipient && (
+                  <div className="flex items-center justify-between text-slate-400">
+                    <span>RECIPIENT WALLET:</span>
+                    <span
+                      className="text-slate-200 font-bold truncate max-w-[200px]"
+                      title={claimResult.recipient}
+                    >
+                      {formatAddress(claimResult.recipient, 6)}
+                    </span>
+                  </div>
+                )}
+
                 {claimResult.gasSent && (
                   <div className="flex items-center justify-between text-slate-400">
                     <span>GAS PROVISIONED:</span>
@@ -273,6 +308,76 @@ export function FaucetModal({ isOpen, onClose }: FaucetModalProps) {
                     </button>
                   </div>
                 </div>
+              </div>
+
+              {/* 1-Click Add iUSDC to MetaMask Button */}
+              <button
+                type="button"
+                onClick={async () => {
+                  const added = await addTokenToWallet(
+                    CONTRACT_ADDRESSES.CC3.MOCK_IUSDC,
+                    'iUSDC',
+                    18
+                  );
+                  if (added) setTokenImported(true);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-xs bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition-all hover:scale-[1.01] active:scale-[0.99]"
+              >
+                {tokenImported ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                    <span>Added to Wallet (iUSDC Tracked)</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-4 w-4 text-emerald-400" />
+                    <span>🦊 Add iUSDC to MetaMask / Wallet</span>
+                  </>
+                )}
+              </button>
+
+              {/* Educational Notice on Custom ERC-20 Tokens */}
+              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-400 text-left space-y-2">
+                <div className="text-slate-200 font-medium flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <span>💡 How to view iUSDC in MetaMask:</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(CONTRACT_ADDRESSES.CC3.MOCK_IUSDC);
+                      setCopiedContract(true);
+                      setTimeout(() => setCopiedContract(false), 2000);
+                    }}
+                    className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                  >
+                    {copiedContract ? (
+                      <Check className="h-3 w-3 text-emerald-400" />
+                    ) : (
+                      <Copy className="h-3 w-3" />
+                    )}
+                    <span>{copiedContract ? 'Copied!' : 'Copy Contract'}</span>
+                  </button>
+                </div>
+                <ol className="list-decimal list-inside space-y-1 text-[11px] text-slate-400 leading-relaxed font-sans">
+                  <li>
+                    Open MetaMask on <strong className="text-slate-200">Creditcoin Testnet</strong>
+                  </li>
+                  <li>
+                    Scroll under <strong className="text-slate-200">Tokens</strong> &gt; click{' '}
+                    <strong className="text-emerald-400 font-medium">&apos;Import tokens&apos;</strong>
+                  </li>
+                  <li>
+                    Paste address:{' '}
+                    <code className="text-cyan-300 font-mono text-[10px] bg-slate-900 px-1 py-0.5 rounded">
+                      {CONTRACT_ADDRESSES.CC3.MOCK_IUSDC}
+                    </code>
+                  </li>
+                  <li>
+                    Symbol: <code className="text-cyan-300 font-mono">iUSDC</code> (Decimals: 18) &gt; click{' '}
+                    <strong className="text-slate-200">Add custom token</strong>
+                  </li>
+                </ol>
               </div>
 
               {/* Action Buttons */}

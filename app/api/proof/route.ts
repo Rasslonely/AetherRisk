@@ -5,10 +5,25 @@ import { AttestcoinProofPayload, MerkleProofEntry, ProofSource, ResolvedProof } 
 
 export const dynamic = 'force-dynamic';
 
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const txHash = searchParams.get('txHash');
+  if (!txHash) {
+    return NextResponse.json({
+      success: true,
+      service: 'AtherRisk Substrate 0xFD2 Proof Engine',
+      supportedSourceChains: ['Ethereum Sepolia (ChainKey: 1)'],
+      usage: 'POST /api/proof with { txHash: string, chainKey?: number } or GET /api/proof?txHash=0x...',
+    });
+  }
+
+  // Delegate query to proof resolution logic
+  return resolveProofRequest(txHash, Number(searchParams.get('chainKey') || 1), searchParams.get('forceLayer') || 'AUTO');
+}
+
 export async function POST(req: NextRequest) {
-  const startTime = Date.now();
   try {
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const { txHash, chainKey = 1, forceLayer = 'AUTO' } = body;
 
     if (!txHash || typeof txHash !== 'string') {
@@ -17,6 +32,20 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    return resolveProofRequest(txHash, chainKey, forceLayer);
+  } catch (error: any) {
+    console.error('[API /api/proof Error]:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Internal proof resolution error' },
+      { status: 500 }
+    );
+  }
+}
+
+async function resolveProofRequest(txHash: string, chainKey: number = 1, forceLayer: string = 'AUTO') {
+  const startTime = Date.now();
+  try {
 
     const normalizedTxHash = txHash.toLowerCase();
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Terminal,
@@ -14,6 +15,7 @@ import {
   Sparkles,
   ArrowRight,
   HelpCircle,
+  Landmark,
 } from 'lucide-react';
 import { InteractiveSandbox } from '../components/interactive-sandbox';
 import { RiskMetricRadar } from '../components/risk-metric-radar';
@@ -138,6 +140,86 @@ export default function SandboxPage() {
               ↳ Result: 0x01 (SUCCESS) • Gas: 23,400 units
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Judge Next-Step Evaluation Gateway */}
+      <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/95 via-slate-950/90 to-slate-900/95 p-6 md:p-8 backdrop-blur-xl shadow-2xl space-y-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+          <div className="space-y-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-semibold flex items-center gap-1.5">
+              <Sparkles className="h-3.5 w-3.5 text-purple-400" />
+              <span>Simulation Complete · Next Steps</span>
+            </span>
+            <h3 className="text-xl font-bold text-slate-100">
+              Ready to Test Real Blockchain Operations?
+            </h3>
+            <p className="text-xs text-slate-400 max-w-2xl font-sans">
+              You witnessed the 30-second cryptographic proof replay. Now interact with live smart contracts on Creditcoin CC3, claim testnet tokens, or inspect verifiable on-chain reputation profiles.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link
+            href="/vault"
+            className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/80 transition-all group space-y-2"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-500/30 group-hover:scale-105 transition-transform">
+                <Landmark className="h-4 w-4" />
+              </div>
+              <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
+            </div>
+            <div>
+              <span className="text-sm font-bold text-slate-200 group-hover:text-emerald-300 transition-colors block">
+                Live Lending Desk
+              </span>
+              <p className="text-xs text-slate-400 leading-snug mt-1 font-sans">
+                Deposit & uncollateralized borrow against real $50k seed liquidity on Creditcoin CC3.
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            href="/passport"
+            className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/80 transition-all group space-y-2"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-500/30 group-hover:scale-105 transition-transform">
+                <ShieldCheck className="h-4 w-4" />
+              </div>
+              <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+            </div>
+            <div>
+              <span className="text-sm font-bold text-slate-200 group-hover:text-cyan-300 transition-colors block">
+                Credit Passport
+              </span>
+              <p className="text-xs text-slate-400 leading-snug mt-1 font-sans">
+                Inspect CreditRegistry.sol on-chain state, hardware TEE quote, and Gemini AI memos.
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            href="/operations"
+            className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/80 transition-all group space-y-2"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-950 text-cyan-400 border border-cyan-500/30 group-hover:scale-105 transition-transform">
+                <Activity className="h-4 w-4" />
+              </div>
+              <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+            </div>
+            <div>
+              <span className="text-sm font-bold text-slate-200 group-hover:text-cyan-300 transition-colors block">
+                Proof Explorer
+              </span>
+              <p className="text-xs text-slate-400 leading-snug mt-1 font-sans">
+                Audit 18/18 synchronous Substrate 0xFD2 precompile proofs and block receipts.
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

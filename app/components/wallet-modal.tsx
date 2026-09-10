@@ -17,7 +17,12 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useWeb3 } from './web3-provider';
-import { CREDITCOIN_CC3_TESTNET, formatAddress } from '@/lib/web3-config';
+import {
+  CREDITCOIN_CC3_TESTNET,
+  CONTRACT_ADDRESSES,
+  formatAddress,
+  addTokenToWallet,
+} from '@/lib/web3-config';
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -293,14 +298,48 @@ export function WalletModal({ isOpen, onClose, onOpenFaucet }: WalletModalProps)
 
                   {/* Institutional Asset (iUSDC) */}
                   <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
-                    <span className="text-[10px] uppercase text-slate-500 block">
-                      Asset Token (iUSDC)
-                    </span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase text-slate-500 block">
+                        Asset Token (iUSDC)
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addTokenToWallet(
+                            CONTRACT_ADDRESSES.CC3.MOCK_IUSDC,
+                            'iUSDC',
+                            18
+                          )
+                        }
+                        className="text-[9px] text-cyan-400 hover:text-cyan-300 font-mono flex items-center gap-0.5 hover:underline"
+                        title="Add iUSDC token to MetaMask"
+                      >
+                        <span>+ MetaMask</span>
+                      </button>
+                    </div>
                     <span className="text-base font-bold text-cyan-300 block truncate">
                       ${usdcBalance}
                     </span>
                     <span className="text-[10px] text-slate-500 block">Institutional USDC</span>
                   </div>
+                </div>
+
+                {/* iUSDC Contract Copy Helper */}
+                <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
+                  <span className="truncate max-w-[220px]" title={CONTRACT_ADDRESSES.CC3.MOCK_IUSDC}>
+                    Contract: {CONTRACT_ADDRESSES.CC3.MOCK_IUSDC}
+                  </span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(CONTRACT_ADDRESSES.CC3.MOCK_IUSDC);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                    className="text-cyan-400 hover:text-cyan-300 ml-2 shrink-0 flex items-center gap-1 font-sans text-xs"
+                  >
+                    {copied ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
+                    <span>{copied ? 'Copied!' : 'Copy'}</span>
+                  </button>
                 </div>
 
                 {/* 1-Click Faucet Quick Action */}

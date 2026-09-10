@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
     const { recipient } = body;
 
-    if (!recipient || !ethers.isAddress(recipient)) {
+    if (!recipient || !ethers.isAddress(recipient.trim().toLowerCase())) {
       return NextResponse.json(
         { success: false, error: 'Invalid or missing Ethereum recipient address.' },
         { status: 400 }
