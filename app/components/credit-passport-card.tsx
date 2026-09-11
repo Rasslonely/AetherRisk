@@ -27,6 +27,7 @@ import {
   Zap,
   Landmark,
 } from 'lucide-react';
+import { FormattedAiMemo } from './formatted-ai-memo';
 
 interface CreditPassportCardProps {
   profile: OnChainCreditProfile | null;
@@ -444,12 +445,8 @@ export function CreditPassportCard({
               </div>
 
               {copilotMemo ? (
-                <div className="text-xs text-slate-300 leading-relaxed space-y-2.5 font-sans bg-slate-950/70 p-4 rounded-xl border border-slate-800/80">
-                  {copilotMemo.split('\n\n').map((paragraph, idx) => (
-                    <p key={idx} className="text-slate-300">
-                      {paragraph}
-                    </p>
-                  ))}
+                <div className="bg-slate-950/70 p-4 rounded-xl border border-slate-800/80">
+                  <FormattedAiMemo content={copilotMemo} />
                 </div>
               ) : (
                 <p className="text-xs text-slate-500 font-mono italic">

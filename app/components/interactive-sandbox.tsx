@@ -21,6 +21,7 @@ import {
 import { SIMULATION_PERSONAS } from '@/lib/telemetry-seed';
 import { SimulationPersona } from '@/lib/types';
 import { VisualPipelineCanvas } from './visual-pipeline-canvas';
+import { FormattedAiMemo } from './formatted-ai-memo';
 
 interface InteractiveSandboxProps {
   isCompact?: boolean;
@@ -648,13 +649,7 @@ export function InteractiveSandbox({
             </div>
 
             {copilotBriefing ? (
-              <div className="text-xs text-slate-300 leading-relaxed space-y-3 font-sans">
-                {copilotBriefing.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="text-slate-300">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+              <FormattedAiMemo content={copilotBriefing} />
             ) : (
               <div className="h-16 flex items-center justify-center text-xs text-slate-500 font-mono">
                 Generating credit risk evaluation...

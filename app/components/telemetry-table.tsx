@@ -43,12 +43,36 @@ export function TelemetryTable({
     try {
       setLoading(true);
       const res = await fetch('/api/operations');
+      let fetchedOps: OperationRecord[] = [];
       if (res.ok) {
         const data = await res.json();
         if (data && Array.isArray(data.operations) && data.operations.length > 0) {
-          setOperations(data.operations);
+          fetchedOps = data.operations;
+        } else if (data && Array.isArray(data.data) && data.data.length > 0) {
+          fetchedOps = data.data;
         }
       }
+
+      if (fetchedOps.length === 0) {
+        fetchedOps = [...PRESEEDED_OPERATIONS];
+      }
+
+      // Merge with any client-side cached operations from localStorage
+      if (typeof window !== 'undefined') {
+        try {
+          const cached = JSON.parse(localStorage.getItem('atherrisk_live_operations') || '[]');
+          if (Array.isArray(cached) && cached.length > 0) {
+            const existingIds = new Set(fetchedOps.map((o) => o.id || o.creditcoinTxHash));
+            for (const c of cached) {
+              if (!existingIds.has(c.id || c.creditcoinTxHash)) {
+                fetchedOps.unshift(c);
+              }
+            }
+          }
+        } catch {}
+      }
+
+      setOperations(fetchedOps);
     } catch {
       // Fallback seamlessly to preseeded operations
       setOperations(PRESEEDED_OPERATIONS);
@@ -59,6 +83,12 @@ export function TelemetryTable({
 
   useEffect(() => {
     fetchOperations();
+
+    const handleNewOp = () => {
+      fetchOperations();
+    };
+    window.addEventListener('atherrisk-new-operation', handleNewOp);
+    return () => window.removeEventListener('atherrisk-new-operation', handleNewOp);
   }, []);
 
   // Filter and search logic

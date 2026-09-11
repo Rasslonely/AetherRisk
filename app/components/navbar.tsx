@@ -99,15 +99,15 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-3 z-40 w-full px-3 sm:px-6 lg:px-8 mb-6">
+      <header className="sticky top-3 z-40 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         <nav
           ref={navRef}
-          className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-2.5 rounded-2xl md:rounded-full border border-slate-800/80 bg-slate-950/90 backdrop-blur-2xl shadow-[0_10px_35px_rgba(0,0,0,0.6)] transition-all relative"
+          className="w-full flex items-center justify-between px-3.5 sm:px-5 py-2 rounded-2xl md:rounded-full border border-slate-800/80 bg-slate-950/90 backdrop-blur-2xl shadow-[0_10px_35px_rgba(0,0,0,0.6)] transition-all relative"
         >
           {/* 1. Logo & Network Status Badge */}
-          <div className="flex items-center gap-2.5 shrink-0">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.35)] group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all overflow-hidden p-1">
+          <div className="flex items-center gap-2 shrink-0">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.35)] group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all overflow-hidden p-1 shrink-0">
                 <Image
                   src="/atherisk_logo_icon.png"
                   alt="AtherRisk Logo"
@@ -118,16 +118,16 @@ export function Navbar() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-sm sm:text-base tracking-tight text-slate-100 group-hover:text-cyan-400 transition-colors">
+                <span className="font-bold text-sm sm:text-base tracking-tight text-slate-100 group-hover:text-cyan-400 transition-colors whitespace-nowrap">
                   Aether<span className="text-cyan-400">Risk</span>
                 </span>
-                <span className="text-[8px] font-mono text-slate-400 tracking-wider hidden sm:inline">
+                <span className="text-[8px] font-mono text-slate-400 tracking-wider hidden lg:inline">
                   RISK ENGINE
                 </span>
               </div>
             </Link>
 
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               CC3 Testnet
             </span>
@@ -136,7 +136,7 @@ export function Navbar() {
           {/* 2. Navigation Pills (Overview + Risk Sandbox + Protocol dApp) */}
           <div
             data-testid="mode-switcher"
-            className="hidden md:flex items-center gap-1 bg-slate-900/90 p-1 rounded-full border border-slate-800/80 shadow-inner shrink-0"
+            className="hidden lg:flex items-center gap-1 bg-slate-900/90 p-1 rounded-full border border-slate-800/80 shadow-inner shrink-0"
           >
             {/* Anchor 1: Overview */}
             <Link
@@ -367,8 +367,9 @@ export function Navbar() {
               title="Claim 10,000 iUSDC Testnet Capital on Creditcoin CC3"
             >
               <Coins className="h-3.5 w-3.5 text-cyan-400" />
-              <span className="hidden sm:inline">Claim 10k iUSDC</span>
-              <span className="sm:hidden text-[11px]">10k Faucet</span>
+              <span className="hidden xl:inline">Claim 10k iUSDC</span>
+              <span className="hidden sm:inline xl:hidden text-[11px]">10k Faucet</span>
+              <span className="sm:hidden text-[11px]">10k</span>
             </button>
 
             {/* Connect Wallet Button */}
@@ -376,10 +377,10 @@ export function Navbar() {
               <ConnectWalletButton />
             </div>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile / Tablet Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden p-2 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors"
+              className="lg:hidden p-2 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors shrink-0"
               aria-label="Open Mobile Menu"
             >
               <Menu className="h-4 w-4" />
