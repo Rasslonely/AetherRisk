@@ -44,7 +44,7 @@ export default function OperationsPage() {
     {
       label: 'Precompile Status',
       value: '0x1 (Success)',
-      desc: 'Zero Oracle Latency',
+      desc: 'Direct Precompile Verification',
       icon: Cpu,
       color: 'amber',
     },
@@ -134,8 +134,8 @@ export default function OperationsPage() {
 
       {/* Main Filterable Table Component */}
       <TelemetryTable
-        title="Live Operations Telemetry Stream"
-        subtitle="18 Historical Cross-Chain Credit Events Synchronously Verified on Creditcoin CC3"
+        title="Verified Operations Feed"
+        subtitle="18 Historical Cross-Chain Credit Events Verified on Creditcoin CC3"
       />
     </div>
   );

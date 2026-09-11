@@ -413,13 +413,13 @@ export function CreditPassportCard({
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-100 flex items-center gap-2">
-                      <span>Institutional AI Underwriter Copilot</span>
+                      <span>AI Credit Underwriting Assessment</span>
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
                         Google Gemini 2.0 Flash
                       </span>
                     </h4>
                     <p className="text-[11px] text-slate-400 font-mono">
-                      Autonomous on-chain risk analysis for {matchingPersona?.name || formatAddress(profile.borrowerAddress)}
+                      Automated risk evaluation for {matchingPersona?.name || formatAddress(profile.borrowerAddress)}
                     </p>
                   </div>
                 </div>
@@ -539,7 +539,7 @@ export function CreditPassportCard({
                       className="px-5 py-2.5 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                     >
                       <Landmark className="h-3.5 w-3.5 fill-slate-950 text-slate-950" />
-                      <span>Borrow in Lending Desk</span>
+                      <span>Open Lending Pool</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </>

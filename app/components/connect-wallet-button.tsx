@@ -50,30 +50,22 @@ export function ConnectWalletButton({ className = '' }: ConnectWalletButtonProps
         <button
           data-testid="connected-account-btn"
           onClick={() => setModalOpen(true)}
-          className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all ${className}`}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-900 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 text-slate-200 shadow-sm transition-all ${className}`}
           title="Click to view account and balances"
         >
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-xs">{formatAddress(account)}</span>
+            <span className="font-mono text-xs font-semibold text-slate-200">{formatAddress(account)}</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-1.5 font-mono text-[10px]">
+          {/* Compact Asset Pill only visible on ultra-wide screens to prevent navbar crowding */}
+          <div className="hidden 2xl:flex items-center gap-1.5 font-mono text-[10px]">
             <span
-              className="px-2 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-slate-300 flex items-center gap-1"
-              title="Native Gas: tCTC"
+              className="px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-semibold flex items-center gap-1 shadow-[0_0_8px_rgba(16,185,129,0.15)]"
+              title="Asset Balance: iUSDC"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <span>{nativeBalance}</span>
-              <span className="text-slate-500">tCTC</span>
-            </span>
-            <span
-              className="px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-semibold flex items-center gap-1 shadow-[0_0_8px_rgba(16,185,129,0.2)]"
-              title="Institutional Asset: iUSDC"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>${usdcBalance}</span>
-              <span className="text-emerald-500/80">iUSDC</span>
+              <span className="text-emerald-500/70">iUSDC</span>
             </span>
           </div>
 

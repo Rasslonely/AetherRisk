@@ -24,18 +24,18 @@ export default function SandboxPage() {
   const guideSteps = [
     {
       step: '01',
-      title: 'Select Borrower Persona',
-      desc: 'Pick between Apex Commodities (Distress), SolarGrid Energy (Mid-Tier), or AlphaQuant (High Volume).',
+      title: 'Select Borrower Profile',
+      desc: 'Choose between Apex Commodities (Distressed), SolarGrid Energy (Growth), or AlphaQuant (Prime).',
     },
     {
       step: '02',
-      title: 'Simulate Cross-Chain Repayment',
-      desc: 'Click "Simulate Cross-Chain Repayment" to trigger the 4-phase Substrate precompile verification pipeline.',
+      title: 'Simulate Repayment',
+      desc: 'Click "Simulate Repayment" to trigger cross-chain verification on Precompile 0xFD2.',
     },
     {
       step: '03',
-      title: 'Inspect TEE Attestation & Vault',
-      desc: 'Examine the AMD SEV-SNP hardware quote, EIP-712 signature, and dynamic ERC-4626 APY discount.',
+      title: 'Review Updated Credit & Rates',
+      desc: 'View the cryptographic attestation, score upgrade, and updated borrowing rate in the lending pool.',
     },
   ];
 
@@ -56,17 +56,17 @@ export default function SandboxPage() {
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <Terminal className="h-3 w-3" />
-                Autonomous Risk Simulator
+                Interactive Sandbox
               </span>
               <span className="text-xs px-2.5 py-0.5 rounded-full font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                 Substrate Precompile 0xFD2
               </span>
             </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 tracking-tight">
-              Institutional Zero-Wallet Risk Sandbox
+              Interactive Credit Simulator
             </h1>
             <p className="text-xs md:text-sm text-slate-400 max-w-2xl">
-              Simulate cross-chain borrower repayments and test synchronous credit re-underwriting on Creditcoin CC3 in under 15 seconds without connecting an external wallet.
+              Simulate cross-chain loan repayments and test real-time credit re-evaluation on Creditcoin CC3 in under 15 seconds without connecting a wallet.
             </p>
           </div>
 

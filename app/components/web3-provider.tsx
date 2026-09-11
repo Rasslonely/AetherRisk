@@ -186,7 +186,25 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
 
         // Use 'any' network to avoid ethers v6 NETWORK_ERROR on chain changes
         const browserProvider = new ethers.BrowserProvider(selectedProvider, 'any');
-        const accounts = await browserProvider.send('eth_requestAccounts', []);
+        let accounts: string[] = [];
+
+        // Attempt wallet_requestPermissions to trigger account picker popup in MetaMask/EIP-1193
+        try {
+          if (typeof selectedProvider.request === 'function') {
+            await selectedProvider.request({
+              method: 'wallet_requestPermissions',
+              params: [{ eth_accounts: {} }],
+            });
+          }
+          accounts = await browserProvider.send('eth_accounts', []);
+        } catch {
+          // Fallback to standard eth_requestAccounts
+          accounts = await browserProvider.send('eth_requestAccounts', []);
+        }
+
+        if (!accounts || accounts.length === 0) {
+          accounts = await browserProvider.send('eth_requestAccounts', []);
+        }
 
         if (!accounts || accounts.length === 0) {
           throw new Error('No accounts selected by user.');
@@ -222,8 +240,19 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     [discoveredWallets]
   );
 
-  // 5. Disconnect Wallet
-  const disconnectWallet = useCallback(() => {
+  // 5. Disconnect Wallet (with EIP-2255 permission revocation)
+  const disconnectWallet = useCallback(async () => {
+    try {
+      if (rawEipProvider && typeof rawEipProvider.request === 'function') {
+        await rawEipProvider.request({
+          method: 'wallet_revokePermissions',
+          params: [{ eth_accounts: {} }],
+        });
+      }
+    } catch (revokeErr) {
+      console.warn('wallet_revokePermissions not supported or rejected:', revokeErr);
+    }
+
     setAccount(null);
     setSigner(null);
     setProvider(null);
@@ -232,7 +261,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     setNativeBalance('0.0000');
     setUsdcBalance('0.0000');
     setError(null);
-  }, []);
+  }, [rawEipProvider]);
 
   // 6. Active Provider Event Listeners (accountsChanged, chainChanged)
   useEffect(() => {

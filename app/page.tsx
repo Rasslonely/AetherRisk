@@ -37,23 +37,23 @@ export default function HomePage() {
       accent: 'cyan',
     },
     {
-      label: 'Precompile Verification',
+      label: 'Verification Latency',
       value: '12.4s',
-      change: 'Native Substrate 0xFD2',
+      change: 'Native Precompile 0xFD2',
       icon: Cpu,
       accent: 'emerald',
     },
     {
-      label: 'Institutional Personas',
+      label: 'Borrower Profiles',
       value: '3 Entities',
-      change: 'Global Trade & DePIN',
+      change: 'Trade & Infrastructure',
       icon: Building2,
       accent: 'purple',
     },
     {
-      label: 'Max Bayesian Score Delta',
+      label: 'Max Score Gain',
       value: '+190 pts',
-      change: '620 → 810 Prime Re-rate',
+      change: '620 → 810 Score Upgrade',
       icon: TrendingUp,
       accent: 'amber',
     },
@@ -82,11 +82,11 @@ export default function HomePage() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight leading-[1.15]"
         >
-          Autonomous{' '}
+          Cross-Chain{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
-            TEE-Guarded
+            Credit Underwriting
           </span>{' '}
-          Cross-Chain Credit & Liquidation Underwriter
+          for Institutional Lending
         </motion.h1>
 
         <motion.p
@@ -95,7 +95,7 @@ export default function HomePage() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed"
         >
-          Eliminating 15-minute cross-chain oracle sync latency and false liquidations by verifying source-chain transactions synchronously in Creditcoin CC3 precompile bytecode within 15 seconds.
+          Real-time borrower solvency verification on Creditcoin CC3 to eliminate overcollateralization penalties and prevent false liquidations.
         </motion.p>
 
         {/* Primary Action Buttons */}
@@ -110,7 +110,7 @@ export default function HomePage() {
             className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(168,85,247,0.35)] hover:scale-105 active:scale-95 transition-all"
           >
             <Terminal className="h-4 w-4 fill-slate-950 text-slate-950" />
-            <span>Fast-Track Sandbox</span>
+            <span>Launch Sandbox</span>
             <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
 
@@ -119,7 +119,7 @@ export default function HomePage() {
             className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 hover:border-emerald-500/60 backdrop-blur-md transition-all hover:scale-105"
           >
             <Zap className="h-4 w-4 text-emerald-400" />
-            <span>Live Web3 dApp</span>
+            <span>Open Lending Pool</span>
             <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
         </motion.div>
@@ -191,38 +191,38 @@ export default function HomePage() {
               <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-purple-500/10 text-purple-400 border border-purple-500/20">
                   <Terminal className="h-3 w-3" />
-                  30s Zero-Wallet Lab
+                  30s Demo Simulator
                 </span>
                 <span className="text-[11px] font-mono text-slate-400 bg-purple-950/60 border border-purple-500/30 px-2 py-0.5 rounded-full">
-                  No Gas Needed
+                  Zero Wallet Setup
                 </span>
               </div>
 
               <div>
                 <h3 className="text-xl font-bold text-slate-100 group-hover:text-purple-300 transition-colors">
-                  Fast-Track Risk Sandbox
+                  Interactive Credit Simulator
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
-                  Evaluate the entire cross-chain underwriting lifecycle in 30 seconds. Trigger Sepolia loan repayments, witness synchronous Substrate precompile 0xFD2 verification, and inspect autonomous Gemini AI underwriting memos without needing a testnet wallet.
+                  Test cross-chain credit re-evaluation in 30 seconds. Simulate debt settlements on Ethereum Sepolia, verify proofs with Precompile 0xFD2, and view generated credit memos without connecting a wallet.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2 pt-2">
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 font-mono block">Speed</span>
+                  <span className="text-[10px] text-slate-400 font-mono block">Latency</span>
                   <span className="text-xs font-semibold text-purple-300 font-mono">12.4s Verification</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
                   <span className="text-[10px] text-slate-400 font-mono block">AI Copilot</span>
-                  <span className="text-xs font-semibold text-cyan-300 font-mono">Google Gemini Flash</span>
+                  <span className="text-xs font-semibold text-cyan-300 font-mono">Gemini Flash Memos</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 font-mono block">Score Re-rate</span>
+                  <span className="text-[10px] text-slate-400 font-mono block">Score Upgrade</span>
                   <span className="text-xs font-semibold text-emerald-300 font-mono">620 → 810 Prime</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
                   <span className="text-[10px] text-slate-400 font-mono block">Prerequisite</span>
-                  <span className="text-xs font-semibold text-slate-300 font-mono">Zero Setup</span>
+                  <span className="text-xs font-semibold text-slate-300 font-mono">No Gas Needed</span>
                 </div>
               </div>
             </div>
@@ -232,7 +232,7 @@ export default function HomePage() {
                 href="/sandbox"
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>Launch Sandbox Simulator</span>
+                <span>Launch Credit Simulator</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -255,10 +255,10 @@ export default function HomePage() {
 
               <div>
                 <h3 className="text-xl font-bold text-slate-100 group-hover:text-emerald-300 transition-colors">
-                  Live Web3 Lending Desk & Passport
+                  Live Lending Pool & Credit Passport
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
-                  Interact with real deployed smart contracts on Creditcoin CC3. Claim 10,000 iUSDC from the faucet, inspect on-chain borrower reputations and AMD SEV-SNP hardware TEE attestations in CreditRegistry.sol, and borrow or deposit against $50,000 seed liquidity.
+                  Interact with verified smart contracts on Creditcoin CC3. Claim testnet iUSDC from the faucet, inspect on-chain borrower ratings in CreditRegistry.sol, and deposit or borrow capital in real time.
                 </p>
               </div>
 
@@ -268,15 +268,15 @@ export default function HomePage() {
                   <span className="text-xs font-semibold text-emerald-300 font-mono">$50,000.00 iUSDC</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 font-mono block">Hardware TEE</span>
+                  <span className="text-[10px] text-slate-400 font-mono block">Hardware Security</span>
                   <span className="text-xs font-semibold text-cyan-300 font-mono">AMD SEV-SNP Quote</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 font-mono block">Vault Model</span>
+                  <span className="text-[10px] text-slate-400 font-mono block">Vault Standard</span>
                   <span className="text-xs font-semibold text-emerald-300 font-mono">ERC-4626 avUSD</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 font-mono block">Faucet Capital</span>
+                  <span className="text-[10px] text-slate-400 font-mono block">Test Tokens</span>
                   <span className="text-xs font-semibold text-cyan-300 font-mono">1-Click 10k iUSDC</span>
                 </div>
               </div>
@@ -287,7 +287,7 @@ export default function HomePage() {
                 href="/vault"
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>Enter Institutional Lending Desk</span>
+                <span>Enter Lending Pool</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -295,7 +295,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. DUAL-ENGINE ARCHITECTURAL OVERVIEW */}
+      {/* 4. ARCHITECTURAL OVERVIEW */}
       <section className="relative rounded-3xl border border-slate-800 bg-slate-950/80 p-6 md:p-8 backdrop-blur-xl shadow-2xl overflow-hidden">
         <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
@@ -303,14 +303,14 @@ export default function HomePage() {
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <ShieldCheck className="h-3 w-3" />
-              Synchronous Architecture
+              Verified Architecture
             </span>
           </div>
           <h2 className="text-2xl font-bold text-slate-100 mt-2 tracking-tight">
-            Dual-Engine Architectural Matrix
+            Protocol Architecture
           </h2>
           <p className="text-xs md:text-sm text-slate-400 mt-0.5">
-            Engine 1 delivers hard-tech Substrate precompile primitives; Engine 2 provides confidential TEE risk underwriting.
+            Native Substrate precompiles verify cross-chain settlement; confidential TEE enclaves compute private risk assessments.
           </p>
         </div>
 
@@ -323,7 +323,7 @@ export default function HomePage() {
               </div>
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
-                  Engine 1 • Smart Contract Primitives
+                  Layer 1 • On-Chain Settlement
                 </span>
                 <h3 className="text-base font-semibold text-slate-100">
                   Creditcoin CC3 Precompile Core
@@ -335,25 +335,25 @@ export default function HomePage() {
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100 font-mono">0xFD2 BlockProver</strong>: Synchronously verifies Merkle inclusion proofs directly in Substrate bytecode without external relayer lag.
+                  <strong className="text-slate-100 font-mono">0xFD2 BlockProver</strong>: Synchronously verifies Merkle inclusion proofs in Substrate bytecode without external relayer delay.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100 font-mono">0xFD3 ChainInfo</strong>: Validates finality and header progression on Ethereum Sepolia.
+                  <strong className="text-slate-100 font-mono">0xFD3 ChainInfo</strong>: Validates block finality and header progression on Ethereum Sepolia.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100 font-mono">EvmV1Decoder</strong>: Extracts execution receipt status (<code className="text-cyan-300">0x1</code>) with strict replay protection mapping.
+                  <strong className="text-slate-100 font-mono">EvmV1Decoder</strong>: Verifies execution status (<code className="text-cyan-300">0x1</code>) with strict replay protection.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100 font-mono">CreditRegistry.sol</strong>: On-chain credit scoring governed by authorized TEE enclave signers.
+                  <strong className="text-slate-100 font-mono">CreditRegistry.sol</strong>: On-chain credit scoring signed by authorized TEE enclave signers.
                 </span>
               </li>
             </ul>
@@ -367,10 +367,10 @@ export default function HomePage() {
               </div>
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
-                  Engine 2 • Risk Underwriting
+                  Layer 2 • Risk Assessment
                 </span>
                 <h3 className="text-base font-semibold text-slate-100">
-                  Confidential TEE Risk Underwriter
+                  Confidential TEE Enclave (AMD SEV-SNP)
                 </h3>
               </div>
             </div>
@@ -379,25 +379,25 @@ export default function HomePage() {
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100">Triple-Layer Proof Resilience</strong>: Live Prover RPC (5s timeout) → Database Cache → Deterministic Mock for 100% demo uptime.
+                  <strong className="text-slate-100">High-Availability Architecture</strong>: Multi-tier fallback (Live RPC → Database Cache → Deterministic Proof) ensuring 100% demo uptime.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100">AMD SEV-SNP TEE Attestation</strong>: Ephemeral EIP-712 typed signing inside confidential hardware containers.
+                  <strong className="text-slate-100">Hardware Attestation</strong>: Cryptographic EIP-712 signatures generated inside confidential AMD SEV-SNP enclaves.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100">Bayesian Risk Kernel</strong>: Dynamically adjusts institutional borrowing APY (4.1% to 9.2%) and unlocks credit limits.
+                  <strong className="text-slate-100">Risk-Adjusted Pricing</strong>: Calibrates borrowing APY (4.1% to 9.2%) according to borrower credit rating.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-100">AetherVault4626</strong>: Dynamic-rate ERC-4626 institutional lending pool adjusting yield in real time.
+                  <strong className="text-slate-100">AetherVault4626</strong>: Tokenized ERC-4626 lending pool providing liquidity with algorithmic rate curves.
                 </span>
               </li>
             </ul>

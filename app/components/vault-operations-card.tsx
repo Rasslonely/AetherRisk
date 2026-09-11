@@ -256,10 +256,10 @@ export function VaultOperationsCard({
       <div className="flex items-center justify-between text-xs font-mono text-slate-400 px-1">
         <span className="flex items-center gap-1.5">
           <Info className="h-3.5 w-3.5 text-cyan-400" />
-          {activeTab === 'deposit' && 'Lend iUSDC to earn dynamic borrower interest'}
-          {activeTab === 'borrow' && 'Drawdown uncollateralized capital within credit line'}
-          {activeTab === 'repay' && 'Settle loan balance to restore available credit limit'}
-          {activeTab === 'withdraw' && 'Burn avUSD vault shares to redeem capital + yield'}
+          {activeTab === 'deposit' && 'Deposit iUSDC to earn interest from active borrower loans'}
+          {activeTab === 'borrow' && 'Borrow iUSDC against your on-chain credit line'}
+          {activeTab === 'repay' && 'Repay borrowed debt to restore your credit line'}
+          {activeTab === 'withdraw' && 'Withdraw your deposited iUSDC and accrued yield'}
         </span>
 
         {user && (

@@ -28,8 +28,8 @@ interface TelemetryTableProps {
 export function TelemetryTable({
   initialLimit,
   showFilters = true,
-  title = 'Live Operations Telemetry Stream',
-  subtitle = '18 of 18 Historical Cross-Chain Credit Events Synchronously Verified on Creditcoin CC3',
+  title = 'Verified Operations Stream',
+  subtitle = 'Cross-Chain Credit Events Verified on Creditcoin CC3 via Precompile 0xFD2',
 }: TelemetryTableProps) {
   const [operations, setOperations] = useState<OperationRecord[]>(PRESEEDED_OPERATIONS);
   const [loading, setLoading] = useState(false);

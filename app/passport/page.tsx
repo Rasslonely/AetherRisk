@@ -88,7 +88,7 @@ export default function PassportPage() {
               Institutional <span className="text-cyan-400">On-Chain Credit Passport</span>
             </h1>
             <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed font-sans">
-              Inspect verified borrower reputation profiles, hardware enclave signatures, and uncollateralized credit limits registered in <code className="text-cyan-300 font-mono">CreditRegistry.sol</code> on Creditcoin CC3. Every credit rating is backed by tamper-proof AMD SEV-SNP confidential computing.
+              Inspect borrower credit profiles, enclave signatures, and borrowing limits registered in <code className="text-cyan-300 font-mono">CreditRegistry.sol</code> on Creditcoin CC3. Credit ratings are cryptographically attested via AMD SEV-SNP confidential computing.
             </p>
           </div>
         </div>
@@ -96,10 +96,10 @@ export default function PassportPage() {
         <div className="relative z-10 pt-4 mt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
           <span className="flex items-center gap-1.5 text-emerald-400">
             <CheckCircle2 className="h-3.5 w-3.5" />
-            <span>Cryptographic EIP-712 Attestation Protocol Live</span>
+            <span>EIP-712 Attestation Active</span>
           </span>
           <span className="text-slate-600">·</span>
-          <span className="text-slate-300">Target Signer: 0x90F7...b906</span>
+          <span className="text-slate-300">Signer: 0x90F7...b906</span>
         </div>
       </div>
 

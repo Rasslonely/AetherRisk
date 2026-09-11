@@ -220,17 +220,17 @@ export function InteractiveSandbox({
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
               <Sparkles className="h-3 w-3" />
-              Autonomous Risk Engine
+              Credit Evaluation
             </span>
             <span className="text-xs px-2.5 py-0.5 rounded-full font-mono bg-slate-900 text-slate-400 border border-slate-800">
-              Creditcoin CC3 Fast-Path
+              Creditcoin CC3
             </span>
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-slate-100 mt-2 tracking-tight">
-            Institutional Risk Mutation Simulator
+            Cross-Chain Credit Evaluation
           </h2>
           <p className="text-xs md:text-sm text-slate-400 mt-0.5">
-            Synchronous cross-chain credit re-underwriting on Creditcoin CC3 in real time
+            Real-time cross-chain debt settlement & score re-evaluation on Creditcoin CC3
           </p>
         </div>
 
@@ -287,7 +287,7 @@ export function InteractiveSandbox({
               </div>
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-red-400 font-semibold">
-                  T-0 State • Initial Risk Tier
+                  Current Status • Pre-Settlement
                 </span>
                 <h3 className="text-sm font-semibold text-slate-200">{selectedPersona.name}</h3>
               </div>
@@ -418,7 +418,7 @@ export function InteractiveSandbox({
                     isResolved ? 'text-emerald-400' : 'text-slate-500'
                   }`}
                 >
-                  T+15s Re-underwritten State
+                  Updated Status • Post-Settlement
                 </span>
                 <h3 className="text-sm font-semibold text-slate-200">{selectedPersona.name}</h3>
               </div>
@@ -431,7 +431,7 @@ export function InteractiveSandbox({
                   : 'bg-slate-900 text-slate-500 border border-slate-800'
               }`}
             >
-              {isResolved ? '✅ PRIME INVESTMENT TIER' : '○ AWAITING SIMULATION'}
+              {isResolved ? '✅ PRIME GRADE' : '○ AWAITING SIMULATION'}
             </span>
           </div>
 
@@ -600,12 +600,12 @@ export function InteractiveSandbox({
           {isResolved ? (
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-mono">
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              <span>Resolved in 12.4s (Zero Oracle Latency)</span>
+              <span>Verified in 12.4s (Precompile 0xFD2)</span>
             </div>
           ) : (
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 text-xs font-mono">
               <Cpu className="h-3.5 w-3.5 text-cyan-400" />
-              <span>Synchronous Substrate Precompile Bytecode</span>
+              <span>Substrate Precompile Verification</span>
             </div>
           )}
         </div>
@@ -634,7 +634,7 @@ export function InteractiveSandbox({
                     </span>
                   </h4>
                   <span className="text-[10px] text-slate-400 font-mono">
-                    Autonomous Credit Copilot • Real-Time Bayesian Synthesis
+                    AI Risk Assessment • Real-Time Solvency Evaluation
                   </span>
                 </div>
               </div>

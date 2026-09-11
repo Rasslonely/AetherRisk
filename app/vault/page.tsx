@@ -90,17 +90,17 @@ export default function VaultPage() {
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
                 <Cpu className="h-3 w-3" />
-                Precompile 0xFD2 Underwritten
+                Verified Settlement (0xFD2)
               </span>
             </div>
 
             {/* Main Headline */}
             <div className="space-y-2">
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-100">
-                Institutional <span className="text-cyan-400">ERC-4626</span> Lending Desk
+                Institutional <span className="text-cyan-400">ERC-4626</span> Lending Pool
               </h1>
               <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-                Algorithmic uncollateralized lending and dynamic risk-adjusted yield venue. Borrowing costs scale synchronously with borrower credit health verified in hardware TEE enclaves on Creditcoin CC3.
+                Deposit iUSDC to earn dynamic yield from borrower debt, or access undercollateralized credit calibrated by on-chain credit scores on Creditcoin CC3.
               </p>
             </div>
           </div>
@@ -122,10 +122,10 @@ export default function VaultPage() {
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4" />
-                <span>Protocol Reserve Health</span>
+                <span>Pool Reserve Status</span>
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-                100% Solvency Ratio
+                100% Available
               </span>
             </div>
 
@@ -143,7 +143,7 @@ export default function VaultPage() {
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed font-sans pt-1">
-              Deposits earn continuous interest from prime borrower spreads. Credit lines are verified via Phala AMD SEV-SNP enclaves with zero oracle lag.
+              Deposits earn dynamic interest from active borrower debt. Credit limits and borrowing rates are verified directly on Creditcoin CC3.
             </p>
           </div>
 
