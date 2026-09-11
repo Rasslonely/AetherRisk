@@ -150,10 +150,29 @@ export async function POST(req: NextRequest) {
 
     // Also attempt saving to database asynchronously if prisma is available
     try {
+      const borrower = await prisma.borrower.upsert({
+        where: { address: newRecord.borrowerAddress },
+        update: {
+          creditScore: newRecord.newScore,
+          currentApyBps: newRecord.newApyBps,
+        },
+        create: {
+          address: newRecord.borrowerAddress,
+          name: newRecord.borrowerName,
+          sector: 'Creditcoin CC3 Vault Participant',
+          creditScore: newRecord.newScore,
+          maxCreditLineUsd: 1000000,
+          currentDebtUsd: 0,
+          collateralUsd: newRecord.provenAmountUsd,
+          currentApyBps: newRecord.newApyBps,
+        },
+      });
+
       await prisma.operation.create({
         data: {
           id: newRecord.id,
           txCode: newRecord.txCode,
+          borrowerId: borrower.id,
           borrowerAddress: newRecord.borrowerAddress,
           borrowerName: newRecord.borrowerName,
           sourceChain: newRecord.sourceChain,
@@ -162,7 +181,7 @@ export async function POST(req: NextRequest) {
           operationType: newRecord.operationType as any,
           provenAmountUsd: newRecord.provenAmountUsd,
           assetSymbol: newRecord.assetSymbol,
-          blockHeight: newRecord.blockHeight,
+          blockHeight: BigInt(newRecord.blockHeight),
           sourceTxHash: newRecord.sourceTxHash,
           creditcoinTxHash: newRecord.creditcoinTxHash,
           proverLatencySec: newRecord.proverLatencySec,
