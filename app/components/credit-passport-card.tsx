@@ -416,7 +416,7 @@ export function CreditPassportCard({
                     <h4 className="text-xs font-bold text-slate-100 flex items-center gap-2">
                       <span>AI Credit Underwriting Assessment</span>
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
-                        Google Gemini 2.0 Flash
+                        Google Gemini 3.5 Flash Lite
                       </span>
                     </h4>
                     <p className="text-[11px] text-slate-400 font-mono">

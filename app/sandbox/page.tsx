@@ -196,7 +196,7 @@ export default function SandboxPage() {
                 Credit Passport
               </span>
               <p className="text-xs text-slate-400 leading-snug mt-1 font-sans">
-                Inspect CreditRegistry.sol on-chain state, hardware TEE quote, and Gemini AI memos.
+                Inspect CreditRegistry.sol on-chain state, hardware TEE quote, and Gemini 3.5 Flash Lite memos.
               </p>
             </div>
           </Link>

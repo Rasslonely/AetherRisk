@@ -214,7 +214,7 @@ export default function HomePage() {
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
                   <span className="text-[10px] text-slate-400 font-mono block">AI Copilot</span>
-                  <span className="text-xs font-semibold text-cyan-300 font-mono">Gemini Flash Memos</span>
+                  <span className="text-xs font-semibold text-cyan-300 font-mono">Gemini 3.5 Flash Lite</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
                   <span className="text-[10px] text-slate-400 font-mono block">Score Upgrade</span>

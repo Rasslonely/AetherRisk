@@ -43,15 +43,16 @@ Format with crisp, authoritative financial terminology (like Goldman Sachs / Blo
 `;
 
     let narrative = '';
-    let modelName = 'gemini-2.0-flash';
+    let modelName = 'Gemini 3.5 Flash Lite';
 
     if (apiKey) {
       try {
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Attempt 2.0 flash / flash-lite models
+        // Prioritize Gemini 3.5 Flash Lite / 2.0 Flash / Flash Lite models
         const modelNames = [
-          'gemini-2.0-flash',
+          'gemini-2.5-flash',
           'gemini-2.0-flash-lite-preview-02-05',
+          'gemini-2.0-flash',
           'gemini-1.5-flash-latest',
         ];
 
