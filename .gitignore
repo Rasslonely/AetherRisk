@@ -38,6 +38,13 @@ lerna-debug.log*
 *.pem
 Thumbs.db
 
+# Media & Large Video Files
+*.mp4
+*.mov
+*.avi
+Docs/video_demo/
+video_demo/
+
 # Private Ideas & Internal Specifications
 .private_ideas/
 _private_ideas/
