@@ -110,7 +110,7 @@ export function Navbar() {
               <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.35)] group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all overflow-hidden p-1 shrink-0">
                 <Image
                   src="/atherisk_logo_icon.png"
-                  alt="AtherRisk Logo"
+                  alt="AetherRisk Logo"
                   width={32}
                   height={32}
                   priority
@@ -417,7 +417,7 @@ export function Navbar() {
                       <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 border border-cyan-500/30 p-1">
                         <Image
                           src="/atherisk_logo_icon.png"
-                          alt="AtherRisk"
+                          alt="AetherRisk"
                           width={24}
                           height={24}
                           className="object-contain"

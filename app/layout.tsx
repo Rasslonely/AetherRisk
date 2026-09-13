@@ -40,7 +40,7 @@ export const metadata: Metadata = {
         url: '/atherisk_logo_full.png',
         width: 810,
         height: 800,
-        alt: 'AtherRisk Logo',
+        alt: 'AetherRisk Logo',
       },
     ],
     type: 'website',
@@ -87,7 +87,7 @@ export default function RootLayout({
               <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 shadow-[0_0_15px_rgba(6,182,212,0.25)] p-1 overflow-hidden">
                 <Image
                   src="/atherisk_logo_icon.png"
-                  alt="AtherRisk Logo"
+                  alt="AetherRisk Logo"
                   width={32}
                   height={32}
                   className="w-full h-full object-contain"

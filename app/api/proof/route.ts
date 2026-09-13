@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   if (!txHash) {
     return NextResponse.json({
       success: true,
-      service: 'AtherRisk Substrate 0xFD2 Proof Engine',
+      service: 'AetherRisk Substrate 0xFD2 Proof Engine',
       supportedSourceChains: ['Ethereum Sepolia (ChainKey: 1)'],
       usage: 'POST /api/proof with { txHash: string, chainKey?: number } or GET /api/proof?txHash=0x...',
     });

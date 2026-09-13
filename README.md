@@ -324,7 +324,7 @@ The synthesis generates four standardized sections tailored for credit committee
 ## 10. Repository Organization
 
 ```
-AtherRisk/
+AetherRisk/
 ├── app/                                 # Next.js 15 Web3 Client Monolith
 │   ├── api/
 │   │   ├── attest/route.ts              # EIP-712 Attestation Handler
@@ -379,8 +379,8 @@ AtherRisk/
 
 ### 1. Clone the Codebase
 ```bash
-git clone https://github.com/Rasslonely/AtherRisk.git
-cd AtherRisk
+git clone https://github.com/Rasslonely/AetherRisk.git
+cd AetherRisk
 ```
 
 ### 2. Install Project Dependencies
